@@ -6,7 +6,6 @@ int ladderLength(string start, string end,
 		if (start.empty() || end.empty()) return 0;
 		queue<string> next, current; // 当前层，下一层
 		unordered_set<string> visited; // 判重
-		unordered_map<string, string > father;
 		int level = 0; // 层次
 		bool found = false;
 		current.push(start);
@@ -22,14 +21,12 @@ int ladderLength(string start, string end,
 						swap(c, new_word[i]);
 						if (new_word == end) {
 							found = true; //找到了
-							father[new_word] = str;
 							break;
 						}
 						if (dict.count(new_word) > 0
 							&& !visited.count(new_word)) {
 							next.push(new_word);
 							visited.insert(new_word);
-							father[new_word] = str;
 						}
 						swap(c, new_word[i]); // 恢复该单词
 					}
