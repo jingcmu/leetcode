@@ -1,3 +1,7 @@
+/*
+不要去对每个单词查词典里是否有距离为1的单词
+而是要去查与该单词距离为1的单词是否在词典中
+*/
 class Solution {
 public:
 int ladderLength(string start, string end,
