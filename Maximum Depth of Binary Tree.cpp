@@ -1,3 +1,4 @@
+First Try:
 /**
  * Definition for binary tree
  * struct TreeNode {
@@ -22,5 +23,14 @@ public :
        length_right = maxDepth( root->right); //recursion to right tree
        length += length_right>length_left?length_right:length_left; //add the larger to length
        return length;
+   }
+};
+
+Second Try:
+class Solution {
+public :
+   int maxDepth(TreeNode * root) {
+       if(root == nullptr) return 0;
+       return max(maxDepth(root->left), maxDepth(root->right)) + 1;
    }
 };
