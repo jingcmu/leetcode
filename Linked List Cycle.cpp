@@ -6,7 +6,7 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
- //¿ìÂıÖ¸Õë
+ //å¿«æ…¢æŒ‡é’ˆ
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
