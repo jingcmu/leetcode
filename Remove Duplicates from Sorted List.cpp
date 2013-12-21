@@ -1,3 +1,4 @@
+First Try:
 /**
 * Definition for singly-linked list.
 * struct ListNode {
@@ -21,4 +22,18 @@ public:
        }
        return head;
    }
+};
+
+Second Try:
+class Solution {
+public:
+    ListNode *deleteDuplicates(ListNode *head) {
+        ListNode *ptr = head;
+        while(ptr != nullptr && ptr->next != nullptr) {
+            if(ptr->val == ptr->next->val) 
+                ptr->next = ptr->next->next;
+            else ptr = ptr->next;
+        }
+        return head;
+    }
 };

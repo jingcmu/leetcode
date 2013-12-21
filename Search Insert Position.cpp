@@ -1,3 +1,4 @@
+First Try:
 //using binary search
 class Solution {
 public:
@@ -25,5 +26,18 @@ public:
                 tail = mid;
             }
         }
+    }
+};
+
+Second Try:
+class Solution {
+public:
+    int searchInsert(int A[], int n, int target) {
+        int index = 0;
+        for(int i=0; i<n; i++) {
+            if(target > A[i]) index++;
+            else break;
+        }
+        return index;
     }
 };
