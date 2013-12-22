@@ -17,17 +17,17 @@ public:
     vector<int> preorderTraversal(TreeNode *root) {
         stack<TreeNode *> s;
         vector<int> v;
-        v.clear();
-        while(root || !s.empty()){
-            while(root){
-                v.push_back(root->val); 
-                s.push(root);
-                root = root->left;
+		TreeNode *p = root;
+        while(p != nullptr || !s.empty()){
+            if(p != nullptr){
+                v.push_back(p->val); 
+                s.push(p);
+                p = p->left;
             }
-            if(!s.empty()){
-                root = s.top();
+            else{
+                p = s.top();
                 s.pop();
-                root = root->right;
+                p = p->right;
             }
         }
         return v;
@@ -49,5 +49,25 @@ public:
 		if(root == nullptr) return v;
         preorderTraversal(root, v);
         return v;
+    }
+};
+
+Third Try:
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode *root) {
+        vector<int> result;
+        const TreeNode *p;
+        stack<const TreeNode *> s;
+        p = root;
+        if (p != nullptr) s.push(p);
+        while (!s.empty()) {
+            p = s.top();
+            s.pop();
+            result.push_back(p->val);
+            if (p->right != nullptr) s.push(p->right);
+            if (p->left != nullptr) s.push(p->left);
+        }
+        return result;
     }
 };
