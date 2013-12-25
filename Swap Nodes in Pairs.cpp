@@ -9,9 +9,7 @@
 class Solution {
 public :
     ListNode * swap(ListNode *left, ListNode *mid, ListNode *right){
-        if(!right){
-            return mid;
-        }
+        if(!right) return mid;
         mid->next = right->next;
         right->next = mid;
         if(left) left->next = right;
@@ -20,13 +18,10 @@ public :
         }
         return right;
     }
-
+	
     ListNode *swapPairs(ListNode *head) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
         ListNode *left, *right;
-        if(! head || ! head->next){
-            return head;
-        }
+        if(! head || ! head->next) return head;
         return swap( NULL, head, head->next);
     }
 };
