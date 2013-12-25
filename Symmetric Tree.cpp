@@ -1,3 +1,5 @@
+First Try:
+µÝ¹é°æ
 /**
 * Definition for binary tree
 * struct TreeNode {
@@ -26,4 +28,37 @@ public:
        }
        return isSymmetric(root->left, root->right);  // whether left and right sub-tree are symmetric
    }
+};
+
+Second Try:
+µü´ú°æ
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isSymmetric(TreeNode *root) {
+        if(root == nullptr) return true;
+        stack<TreeNode *> s;
+        s.push(root->right); 
+        s.push(root->left);
+        while(!s.empty()) {
+            TreeNode *p = s.top(); s.pop();
+            TreeNode *q = s.top(); s.pop();
+            if(p == nullptr && q == nullptr) continue;
+            if(p == nullptr || q == nullptr) return false;
+            if(p->val != q->val) return false;
+            s.push(p->left);
+            s.push(q->right);
+            s.push(p->right);
+            s.push(q->left);
+        }
+        return true;
+    }
 };
