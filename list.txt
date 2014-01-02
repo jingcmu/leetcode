@@ -57,7 +57,7 @@ Jump Game II	2012-03-16	22.3%
 Merge k Sorted Lists	2012-02-13	22.1%
 ZigZag Conversion	2011-12-05	21.8%
 Two Sum	2011-03-13	21.8%
-4Sum	2012-01-26	21.5%
+4Sum	2012-01-26	21.5%   
 Sqrt(x)	2012-04-03	21.4%
 Rotate List	2012-03-27	21.3%
 Best Time to Buy and Sell Stock III	2012-11-06	21.2%
@@ -68,7 +68,6 @@ Insert Interval	2012-03-27	20.4%
 Permutation Sequence	2012-03-27	20.4%
 Scramble String	2012-04-30	20.2%
 Maximal Rectangle	2012-04-23	20.1%
-Implement strStr()	2012-02-18	19.7%
 Largest Rectangle in Histogram	2012-04-22	19.7%
 Merge Intervals	2012-03-26	19.6%
 Copy List with Random Pointer	2013-10-03	19.6%

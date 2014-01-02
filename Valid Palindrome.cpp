@@ -31,6 +31,7 @@ public:
 };
 
 纯STL实现方法
+isalnum用来判断是否字母和数字，prev返回迭代器前的位置，tolower转换小写字母
 class Solution {
 public:
 	bool isPalindrome(string s) {
@@ -39,7 +40,7 @@ public:
 		while (left < right) {
 			if (!::isalnum(*left)) ++left;
 			else if (!::isalnum(*right)) --right;
-			else if (*left != *right) return false;
+			else if (*left++ != *right--) return false;
 		}
 		return true;
 	}
