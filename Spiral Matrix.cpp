@@ -1,3 +1,5 @@
+//把打印分为四部分：从左到右 从上到下 从右到左 从下到上
+//设置上下左右的边界，每次更新边界，并判断是否终止打印
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int> > &matrix) {
