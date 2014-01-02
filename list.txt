@@ -1,4 +1,3 @@
-Binary Tree Postorder Traversal	2013-11-07	29.7%
 Combinations	2012-04-18	29.7%
 Path Sum	2012-10-13	29.6%
 Pascal's Triangle II	2012-10-28	29.5%
@@ -62,7 +61,6 @@ Two Sum	2011-03-13	21.8%
 Sqrt(x)	2012-04-03	21.4%
 Rotate List	2012-03-27	21.3%
 Best Time to Buy and Sell Stock III	2012-11-06	21.2%
-Valid Palindrome	2013-01-12	21.2%
 Longest Palindromic Substring	2011-11-11	21.1%
 Recover Binary Search Tree	2012-09-01	20.9%
 First Missing Positive	2012-03-08	20.8%
