@@ -1,4 +1,5 @@
-//
+//方法一：
+//用二维vector记录棋盘放置情况
 class Solution {
 private:
     vector<vector<string> > ret;
@@ -56,4 +57,52 @@ public:
         solveNQueens(n, matrix, 0);
         return ret;
     }
+};
+
+//方法二：
+//用一维vector记录棋盘放置情况
+class Solution {
+private:
+	vector<vector<string> > ret;
+public:
+	//参数：当前行row，记录每行放置列号的数组colArray
+    bool check(int row, vector<int> &colArray) {  
+		//遍历之前行的放置情况，检查当前
+        for (int i = 0; i < row; ++i) {  
+            int diff = abs(colArray[i] - colArray[row]); //diff记录列号差
+            if (diff == 0 || diff == row - i) {          // int a row or line  
+                return false;  
+            }  
+        }  
+        return true;  
+    }  
+  
+    void placeQueens(int row, int n, vector<int> &colArray) {
+		vector<string> v(n);
+        string str;
+        if (row == n) {  
+            for(int i=0; i<n; i++){
+                str = "";
+                for(int j=0; j<n; j++){
+					str += (j == colArray[i]? 'Q':'.');
+                }
+                v[i] = str;
+            }
+            ret.push_back(v);
+            return;  
+        }  
+          
+        for (int col = 0; col < n; ++col) {  
+            colArray[row] = col;  //尝试每列
+            if (check(row, colArray)){ //如果合法则往下递归
+                placeQueens(row+1, n, colArray);  
+            }  
+        }  
+    }  
+      
+    vector<vector<string> > solveNQueens(int n) {  
+        vector<int> colArray(n);             
+        placeQueens(0, n, colArray);            
+        return ret;  
+    } 
 };
