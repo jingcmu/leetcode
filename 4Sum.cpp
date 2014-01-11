@@ -1,16 +1,15 @@
 class Solution {
 public:
     vector<vector<int> > fourSum(vector<int> &num, int target) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
         int len = num.size(), target2;
         vector<vector<int> > v_res;
         vector<int> v;
-        if(len < 4){
-            return v_res;
-        }
-        sort(num.begin(), num.end());
-        for(int i=0; i<len; i++){
-            for(int j=i+1; j<len; j++){
+        if(len < 4) return v_res; //如果len小于4，则返回空vector
+        sort(num.begin(), num.end()); //对数组排序
+
+		//枚举的时候，位置不发生变化
+        for(int i=0; i<len-3; i++){
+            for(int j=i+1; j<len-2; j++){
                 target2 = target - (num[i]+num[j]);
                 int head = j+1, tail = len-1;
                 while(head < tail){
