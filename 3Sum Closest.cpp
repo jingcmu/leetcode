@@ -1,7 +1,7 @@
+//跟3sum没什么不一样
 class Solution {
 public:
     int threeSumClosest(vector<int> &num, int target) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
         int len = num.size();
         int sum = 0, target_2sum, head, tail;
         int diff, diff_min = (1<<31)-1;
@@ -11,11 +11,13 @@ public:
             }
             return sum;
         }
+		//先排序
         sort(num.begin(),num.end());
         for(int i=0; i<len-2; i++){
             target_2sum = target - num[i];
             head = i+1;
             tail = len-1;
+			//2sum左右逼近
             while(head < tail){
                 sum = num[i]+num[head]+num[tail];
                 diff = target - sum;
@@ -28,6 +30,7 @@ public:
                 else if(diff>0){
                     head++;
                 }
+				//更新最小差距
                 if(abs(diff_min)>abs(diff)){
                     diff_min = diff;
                 }
