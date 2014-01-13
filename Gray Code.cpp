@@ -3,7 +3,6 @@
 class Solution {
 public:
     vector<int> grayCode(int n) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
         int range = 1 << n;
         vector<int> v;
         v.resize(range);
