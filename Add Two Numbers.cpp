@@ -6,6 +6,11 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+ /*
+ 思路：考察基本的链表操作，一种不太好的做法是另外分配一个空间放结果，
+ 我决定不使用额外空间， 所以第一次写了70多行代码才AC，
+ 后来经过改进，就变成了下面的40多行代码
+ */
 class Solution {
 public:
     int add(int a, int b, int *carry){
@@ -20,7 +25,6 @@ public:
         }
     }
     ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
         int carry = 0;
         ListNode *ll1 = l1, *ll2 = l2, *last;
         if(l1 == NULL){
