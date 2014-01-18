@@ -7,35 +7,26 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+/*
+用DFS和BFS都行吧，不过因为不是求最短XX，所以深搜就行了，深搜也好写一点
+终止条件：1、传进来的指针为NULL 2、无子节点，且到当前节点的和不等于目标
+完成条件：无子节点且到当前节点的和等于目标
+*/
 class Solution {
 public:
-    bool hasPathSum(TreeNode *root, int sum, int sumToNow, bool &equal) {
-        if(!root){
-            return false;
+    bool hasPathSum(TreeNode *root, int sum, int sumToNow) {
+        if(!root) return false; //终止条件
+        sumToNow += root->val;  //得到到当前节点的和
+        if(!root->right && !root->left) { //无子节点
+            if(sumToNow == sum) return true; //完成条件
+            else return false;	//终止条件
         }
-        sumToNow += root->val;
-        if(!root->right && !root->left){
-            if(sumToNow == sum){
-                equal = true;
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        if(hasPathSum(root->right, sum, sumToNow, equal)||hasPathSum(root->left, sum, sumToNow, equal)){
-            equal = true;
-            return true;
-        }
-        else{
-            return false;
-        }
+        if(hasPathSum(root->right, sum, sumToNow) || //分别对左右子节点递归
+			hasPathSum(root->left, sum, sumToNow)) return true;
+        else return false;
     }
     bool hasPathSum(TreeNode *root, int sum) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
         int sumToNow = 0;
-        bool equal = false;
-        hasPathSum(root, sum, sumToNow, equal);
-        return equal;
+        return hasPathSum(root, sum, sumToNow);
     }
 };
