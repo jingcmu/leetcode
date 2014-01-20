@@ -3,7 +3,6 @@ My solution:
 class Solution {
 public:
     int lengthOfLastWord(const char *s) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
         int len = strlen(s), len_last = 0;
         int cur = len-1;
         if(!len){
@@ -18,18 +17,18 @@ public:
 };
 
 Other solution:
-//从前往后读, 实现比较猥琐
+//从前往后读, 实现比较猥琐，s++还是不++，非常绕
 class Solution {
 public:
 	int lengthOfLastWord(const char *s) {
 		int len = 0;
 		while (*s) {
-			if (*s++ != ' ')
+			if (*s++ != ' ') //如果没遇到空格len就++
 				++len;
-			else if (*s && *s != ' ')
+			else if (*s && *s != ' ')//如果遇到空格，再次遇到不是空格的len清零
 				len = 0;
 		}
-		return len;
+		return len; 
 	}
 };
 
