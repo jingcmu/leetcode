@@ -7,52 +7,33 @@
  * };
  */
 
-
+/*
+merge k 列其实就是不断的merge两列，
+merge两列，用了点技巧，不需要判断队列NULL了
+*/
 class Solution {
 public:
     ListNode *merge2Lists(ListNode *list1, ListNode *list2){
-        ListNode *list = NULL, *curList;
-        while(list1 != NULL && list2 != NULL){
-            int value = 0;
-            if(list1->val < list2->val){
-                value = list1->val;
+        ListNode head(-1), *curList = &head;
+        while(list1 != NULL || list2 != NULL){
+            int value1 = (list1 == NULL? INT_MAX:list1->val);
+			int value2 = (list2 == NULL? INT_MAX:list2->val);
+            if(value1 < value2){
+                curList->next = list1;
                 list1 = list1->next;
+				curList = curList->next;
             }
             else{
-                value = list2->val;
+                curList->next = list2;
                 list2 = list2->next;
-            }
-            if(!list){
-                list = new ListNode(value);
-                curList = list;
-            }
-            else{
-                curList->next = new ListNode(value);
-                curList = curList->next;
+				curList = curList->next;
             }
         }
-        ListNode *l = NULL;
-        if(list1){
-            l = list1; 
-        }
-        else if(list2){
-            l = list2;
-        }
-        if(list){
-            curList->next = l;
-        }
-        else{
-            list = l;
-        }
-        return list;
+        return head.next;
     }
     ListNode *mergeKLists(vector<ListNode *> &lists) {
-        // IMPORTANT: Please reset any member data you declared, as
-        // the same Solution instance will be reused for each test case.
         int len = lists.size();
-        if(!len){
-            return NULL;
-        }
+        if(!len) return NULL;
         for(int i=1; i<len; i++){
             lists[i] = merge2Lists(lists[i-1], lists[i]);
         }
