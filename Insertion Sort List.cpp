@@ -9,17 +9,15 @@
 class Solution {
 public:
     ListNode *insertionSortList(ListNode *head) {
-        // IMPORTANT: Please reset any member data you declared, as
-        // the same Solution instance will be reused for each test case.
         ListNode *cur, *cur_left = head, *ptr_left, *ptr;
 		bool flag;
-        if(!head || !head->next){
+        if(!head || !head->next){ //0个或1个节点的情况
             return head;
         }
         cur = cur_left->next;
-        while(cur){
+        while(cur) {
 			flag = true;
-            if(cur->val < head->val){
+            if(cur->val < head->val) {
                 cur_left->next = cur->next;
                 cur->next = head;
                 head = cur;
@@ -28,7 +26,7 @@ public:
             }
             ptr_left = head;
             ptr = ptr_left->next;
-            while(cur && ptr != cur){
+            while(cur && ptr != cur) {
                 if(cur->val < ptr->val){
                     cur_left->next = cur->next;
                     cur->next = ptr;

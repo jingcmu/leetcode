@@ -1,33 +1,30 @@
 class Solution {
 public:
     string convert(string s, int nRows) {
-        // IMPORTANT: Please reset any member data you declared, as
-        // the same Solution instance will be reused for each test case.  
-        vector<string> rows;
-        string solution;
-        int size = s.size(), cur=0, dir = 0;
-        if(nRows == 1 || nRows > size){
+        vector<string> rows(nRows);
+        string solution = "";
+        int size = s.size(), cur = 0, dir = 0;
+		//快速终止条件
+        if(nRows == 1 || nRows > size) {
             return s;
         }
-        rows.resize(nRows);
-        for(int i=0; i<size; i++){
+        for(int i=0; i<size; i++) {
             rows[cur]+=s[i];
-            if(dir == 0){
+            if(dir == 0){ //0代表向下，1代表向上
                 cur++;
-                if(cur == nRows-1){
-                    dir = 1;
+                if(cur == nRows-1) {
+                    dir = 1; //反转
                 }
             }
             else{
                 cur--;
                 if(cur == 0){
-                    dir = 0;
+                    dir = 0; //反转
                 }
             }
         }
-        solution = rows[0];
-        for(int j=1; j<nRows; j++){
-            solution+=rows[j];
+        for(int j=0; j<nRows; j++) {
+            solution += rows[j];
         }
         return solution;
     }
