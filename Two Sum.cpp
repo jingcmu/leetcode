@@ -1,19 +1,6 @@
+/*两头逼近的方法*/
 class Solution {
 public:
-   vector<int> sort(vector<int> numbers, int n){  
-        for(int i=0; i<n; i++){
-            for(int j=n-1; j>i; j--){
-                if(numbers[j] < numbers[j-1]){
-                    int temp;
-                    temp = numbers[j];
-                    numbers[j] = numbers[j-1];
-                    numbers[j-1] = temp;
-                }
-            }
-        }
-        return numbers;
-    }
-
 	int getIndex(vector<int> numbers, int num){
 		for(int i=0; i<numbers.size(); i++){
 			if(numbers[i] == num)
@@ -29,12 +16,11 @@ public:
 	}
 
     vector<int> twoSum(vector<int> &numbers, int target) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
         int head = 0, tail = numbers.size() - 1;
         int sum;
         vector<int> v;
-		vector<int> number_sorted;
-        number_sorted = sort(numbers, tail+1);
+		vector<int> number_sorted = numbers;
+        sort(number_sorted.begin(), number_sorted.end());
         while(head<tail){
             sum = number_sorted[head] + number_sorted[tail];
             if(target == sum){
@@ -44,12 +30,8 @@ public:
                 v.push_back(head>tail?head:tail);
                 return v;
             }
-            if(sum < target){
-                head++;
-            }
-            else{
-                tail--;
-            }
+            if(sum < target) head++;
+            else tail--;
         }
         return v;
     }
