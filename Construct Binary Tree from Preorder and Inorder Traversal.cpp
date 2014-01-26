@@ -7,6 +7,9 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+/*
+跟后序+中序构建二叉树是一样的
+*/
 class Solution {
 public:
     TreeNode *buildTree(vector<int> &inorder, int h1, int t1, vector<int> &preorder, int h2, int t2) {
@@ -25,7 +28,6 @@ public:
 
     }
     TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
         int size1 = inorder.size(), size2 = preorder.size();
         int size = size1;
         if(size1 == 0 || size1 != size2){
