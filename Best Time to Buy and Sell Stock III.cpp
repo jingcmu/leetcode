@@ -1,55 +1,28 @@
+/*
+思路：O(n平方)的方法，对每个点进行分割，算出这个点两边的最大利润相加
+O(n)的方法，先正向算出从起点开始到每个点的最大利润，再逆向算出从每个点开始到终点的最大利润
+进而就得出了最大利润
+*/
 class Solution {
 public:
-   int maxProfit(vector<int> &prices, int a, int b, int *start, bool flag){
-        int min2now, max = 0, s = a;
-		if(flag){
-			*start = a;
+    int maxProfit(vector<int> &prices) 
+	{
+		vector<int> profit(prices.size()+1);
+		int min_price = INT_MAX;
+		//先得到从左到右的最大利润(起点固定)
+		for (int i = 0; i < prices.size(); i++)
+		{
+			if (prices[i] < min_price) min_price = prices[i]; //更新左起最小price
+			else profit[i+1] = max(profit[i], prices[i]-min_price); //更新最大利润
 		}
-        if(a >= b){
-            return 0;
-        }
-        min2now = prices[a];
-        for(int i=a; i<=b; i++){
-            if(min2now > prices[i]){
-                min2now = prices[i];
-				s = i;
-            }
-            if(max < prices[i] - min2now){
-                max = prices[i] - min2now;
-				if(flag){
-					*start = s;
-				}
-            }
-        }
-        return max;
-    }
-
-    int maxProfit(vector<int> &prices) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
-        int len = prices.size();
-        int start, end;
-        int max_profit = 0, profit, profit_right, profit_left;
-        if(len < 2){
-            return 0;
-        }
-        profit_left = maxProfit(prices, 0, len-1, &start, true);
-        if(profit_left > max_profit){
-            max_profit = profit_left;
-        }
-		else{
-			return 0;
+		//再得到从右到左的最大利润(终点固定)
+		int max_price = INT_MIN , max_profit = 0, res = 0;
+		for (int i = prices.size() - 1; i >= 0 ; i--)
+		{
+			if (prices[i] > max_price) max_price = prices[i]; //更新右起最大price
+			else max_profit = max(max_profit, max_price - prices[i]); //更新最大利润
+			res = max(profit[i+1]+ max_profit, res); 
 		}
-        while(start < len-1){
-            profit_right = maxProfit(prices, 0, start-1, &start, false);
-            profit = profit_right + profit_left;
-            if(profit > max_profit){
-                max_profit = profit;
-            }
-            profit_left = maxProfit(prices, start+1, len-1, &start, true);
-			if(!profit_left){
-				break;
-			}
-        }
-        return max_profit;
-    }
+		return res;
+	}
 };
