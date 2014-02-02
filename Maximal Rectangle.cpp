@@ -1,3 +1,7 @@
+/*
+用一个二维数组记录每行到当前点连续1的个数，
+然后以每个点为矩阵右下角去计算面积
+*/
 class Solution {
 public:
     int maximalRectangle(vector<vector<char> > &matrix) {
@@ -26,7 +30,7 @@ public:
                 if(!width){
                     continue;
                 }
-                //从当前行网上推,一层层算出最大面积
+                //从当前行往上推,一层层算出最大面积
                 for(int k=i; k>=0; k--){
                     width = min(oneinline[k][j], width); //如果当前行的width小则更新width
                     if(!width) break; //width为0,则矩阵中断
