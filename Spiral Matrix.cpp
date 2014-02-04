@@ -9,7 +9,7 @@ public:
         }
         int beginY = 0, endY = matrix.size()-1;
         int beginX = 0, endX = matrix[0].size()-1;
-        while(true){
+        while(true) {
             //from left to right
             for(int i=beginX; i<=endX; ++i) res.push_back(matrix[beginY][i]);
             if(++beginY > endY) break;
