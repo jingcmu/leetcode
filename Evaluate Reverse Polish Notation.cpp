@@ -1,3 +1,7 @@
+/*
+stoi可以把字符串转成数字，是c++的库函数
+这题其实很简单，遇到数字就压栈，遇到操作符就出栈两个数进行运算，把结果压栈
+*/
 class Solution {
 public:
     int evalRPN(vector<string> &tokens) {
