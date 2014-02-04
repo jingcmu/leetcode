@@ -52,8 +52,6 @@ public:
     }
 };
 
-
-
 	//分拆链表的第二种写法
     RandomListNode* removeClone(RandomListNode* head) {
         RandomListNode* ptr1 = head, *ptr2 = head->next, *ptr;
