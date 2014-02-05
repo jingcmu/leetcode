@@ -1,7 +1,14 @@
+/*
+这题有点像unique path II那题，可以用动态规划或者DFS来做
+动态规划的方法状态转移方程为：
+isReachable[i][j] = ( (isReachable[i-1][j] && s3[i+j-1]==s2[i-1]) ||
+                      (isReachable[i][j-1] && s3[i+j-1]==s1[j-1]))
+isReachable下标没减一，s1、s2、s3下标减一是因为isReachable下标是0 0的时候代表没走，
+而字符串下标是从0开始算的
+*/
 class Solution {
 public:
     bool isInterleave(string s1, string s2, string s3) {
-        // Note: The Solution object is instantiated only once and is reused by each test case. 
         int len1 = s1.length(), len2 = s2.length(), len3 = s3.length();
         if(len1+len2 != len3){
             return false;
