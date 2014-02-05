@@ -1,3 +1,7 @@
+/*
+last_valid是这里的关键，理解了这个变量设置的意义，
+这个题就懂了
+*/
 class Solution {
 public:
     int longestValidParentheses(string s) {
@@ -13,7 +17,7 @@ public:
                 }
                 else {
                     left.pop(); //用掉一个'('
-                    if(left.empty()) { //如果栈为空,说明能一直匹配到上个')'
+                    if(left.empty()) { //如果栈为空,说明能一直匹配到上个匹配不了的')'
                         max_len = max(max_len, i - last_valid);
                     }
                     else { //否则,只能用上个'('的位置算
