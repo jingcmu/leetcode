@@ -1,3 +1,4 @@
+//很简单，像发TCP包那样，每次增大一倍
 class Solution {
 public:
     int divide(int dividend, int divisor) {
@@ -15,6 +16,7 @@ public:
                 multior = 0;
             }
         }
+		//判断两个数符号是否相同，不相同则返回负数
         return ((dividend^divisor)>>31)? 0-res:res;
     }
 };
