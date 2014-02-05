@@ -29,17 +29,17 @@ public:
 	*/
 	string connect(vector<string> &words, int begin, int end, int len, int L, bool is_last) {
 		string s;
-		int n = end - begin + 1;
+		int n = end - begin + 1; //待连接的单词个数
 		for (int i = 0; i < n; ++i) {
 			s += words[begin + i];
-			addSpaces(s, i, n - 1, L - len, is_last);
+			addSpaces(s, i, n - 1, L - len, is_last); //i是间隔索引，n-1是间隔总数
 		}
 		if (s.size() < L) s.append(L - s.size(), ' ');
 		return s;
 	}
 
 	/**
-	* @brief 添加空格.
+	* @brief 添加空格，将L长度的空格尽量均匀的分配到n个间隙当中
 	* @param[inout]s 一行
 	* @param[in] i 当前空隙的序号
 	* @param[in] n 空隙总数
@@ -49,6 +49,7 @@ public:
 	*/
 	void addSpaces(string &s, int i, int n, int L, bool is_last) {
 		if (n < 1 || i > n - 1) return;
+		//i < (L % n) ? 1 : 0 这个太巧妙了
 		int spaces = is_last ? 1 : (L / n + (i < (L % n) ? 1 : 0));
 		s.append(spaces, ' ');
 	}
