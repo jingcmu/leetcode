@@ -36,8 +36,8 @@ public:
 		for (int i = 1; i <= s.size(); ++i) {
 			for (int j = i - 1; j >= 0; --j) {
 				if (f[j] && dict.find(s.substr(j, i - j)) != dict.end()) {
-					f[i] = true;
-					break;
+					f[i] = true; 
+					break; //发现第i个位置前能分词就可以不用搜索其他的j了
 				}
 			}
 		}
