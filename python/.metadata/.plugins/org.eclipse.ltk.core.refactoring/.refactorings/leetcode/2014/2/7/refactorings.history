@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;leetcode/Single Number.py&apos; to &apos;Single_Number.py&apos;" description="Rename resource &apos;Single Number.py&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Single Number.py" name="Single_Number.py" stamp="1392330227819" updateReferences="true"/>
+</session>

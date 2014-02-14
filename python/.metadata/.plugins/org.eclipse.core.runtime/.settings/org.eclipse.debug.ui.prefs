@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+org.eclipse.debug.ui.PREF_CHANGED_VALUE_BACKGROUND=57,113,113
+org.eclipse.debug.ui.PREF_LAUNCH_PERSPECTIVES=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<launchPerspectives/>\r\n
+org.eclipse.debug.ui.build_before_launch=false
+org.eclipse.debug.ui.consoleBackground=39,40,34
+org.eclipse.debug.ui.errorColor=249,38,114
+org.eclipse.debug.ui.inColor=230,219,116
+org.eclipse.debug.ui.outColor=248,248,242
+org.eclipse.debug.ui.switch_perspective_on_suspend=always
+org.eclipse.debug.ui.wait_for_build=never
+preferredDetailPanes=DefaultDetailPane\:DefaultDetailPane|
+preferredTargets=default\:default|
