@@ -6,4 +6,7 @@ org.eclipse.debug.ui.consoleBackground=39,40,34
 org.eclipse.debug.ui.errorColor=249,38,114
 org.eclipse.debug.ui.inColor=230,219,116
 org.eclipse.debug.ui.outColor=248,248,242
+org.eclipse.debug.ui.switch_perspective_on_suspend=always
 org.eclipse.debug.ui.wait_for_build=never
+preferredDetailPanes=DefaultDetailPane\:DefaultDetailPane|
+preferredTargets=default\:default|

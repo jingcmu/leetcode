@@ -1,0 +1,26 @@
+import sys
+class Solution:
+    def getMinDiff(self, num, start, end, newTarget):
+        minDiff = sys.maxint
+        while start < end:
+            diff = num[start] + num[end] - newTarget
+            if abs(diff) < minDiff:
+                minDiff = abs(diff)
+            if diff > 0:
+                end -= 1
+            else:
+                start += 1
+        return minDiff
+
+    # @return an integer
+    def threeSumClosest(self, num, target):
+        num.sort()
+        minDiff = sys.maxint
+        for i in xrange(len(num)):
+            if i != 0 and num[i] == num[i-1]:
+                continue
+            diff = getMinDiff(num, i+1, len(num)-1, target - num[i])
+            if diff < minDiff:
+                minDiff = diff
+        return target + minDiff
+
