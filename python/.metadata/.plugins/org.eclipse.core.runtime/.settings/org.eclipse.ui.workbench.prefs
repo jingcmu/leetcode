@@ -5,6 +5,7 @@ CONTENT_ASSIST_FOREGROUND_COLOR=248,248,242
 HYPERLINK_COLOR=138,188,84
 INCOMING_COLOR=127,179,71
 OUTGOING_COLOR=248,248,242
+PLUGINS_NOT_ACTIVATED_ON_STARTUP=
 RESOLVED_COLOR=230,219,116
 eclipse.preferences.version=1
 org.eclipse.egit.ui.DiffAddBackgroundColor=39,40,34
@@ -20,3 +21,4 @@ org.eclipse.egit.ui.IgnoredResourceForegroundColor=248,248,242
 org.eclipse.egit.ui.UncommittedChangeBackgroundColor=44,86,86
 org.eclipse.egit.ui.UncommittedChangeForegroundColor=248,248,242
 org.eclipse.search.ui.match.highlight=57,113,113
+org.eclipse.ui.commands=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<org.eclipse.ui.commands/>
