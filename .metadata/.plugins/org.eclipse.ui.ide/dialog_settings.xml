@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="installedFeatures">
+		<item value="AnyEditTools:2.4.4.201401272005"/>
+		<item value="com.google.eclipse.mechanic:0.3.4"/>
+		<item value="org.eclipse.egit:3.1.0.201310021548-r"/>
+		<item value="org.eclipse.emf.common:2.9.1.v20130827-0309"/>
+		<item value="org.eclipse.emf.ecore:2.9.1.v20130827-0309"/>
+		<item value="org.eclipse.help:2.0.1.v20130911-1000"/>
+		<item value="org.eclipse.jgit:3.1.0.201310021548-r"/>
+		<item value="org.eclipse.platform:4.3.1.v20130911-1000"/>
+		<item value="org.eclipse.rcp:4.3.1.v20130911-1000"/>
+		<item value="org.python.pydev.feature:3.3.3.201401272005"/>
+	</list>
+	<section name="ExternalProjectImportWizard">
+		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\Jacky\leetcode\python"/>
+		</list>
+		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value=""/>
+		</list>
+	</section>
+	<section name="NewWizardAction">
+		<item value="org.python.pydev.ui.wizards.project.PythonProjectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.python.pydev.PythonCategory"/>
+		</list>
+	</section>
+</section>
