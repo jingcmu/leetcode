@@ -2,7 +2,6 @@
 这一题跟work ladder的区别是需要用一个map记录ladder的路径
 这个map设置的很巧妙，key是string代表当前节点，
 value是一个vector<string>用来记录从哪些节点可以到当前节点
-
 */
 class Solution {
 	public:

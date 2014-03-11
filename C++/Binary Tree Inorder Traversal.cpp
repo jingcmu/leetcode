@@ -59,8 +59,9 @@ class Solution {
 public:
     vector<int> inorderTraversal(TreeNode *root) {
         stack<TreeNode *> s;
-        vector<int> v;
+        vector<int> res;
         TreeNode *p = root;
+		//只要左子树非空，就把左子树压栈，否则就访问该节点并查看其右子树
         while(p != nullptr || !s.empty()) {
             if(p != nullptr) {
                 s.push(p);
@@ -68,10 +69,10 @@ public:
             }
             else {
                 p = s.top(); s.pop();
-                v.push_back(p->val);
+                res.push_back(p->val);
                 p = p->right;
             }
         }
-        return v;
+        return res;
     }
 };
