@@ -3,12 +3,8 @@ First Try:
 class Solution {
 public:    
     void permute(vector<vector<int> > &v_res, vector<int> &num, int k, int len){
-        vector<int> v;
         if(k == len){
-            for(int i=0; i<=len; i++){
-                v.push_back(num[i]);
-            }
-            v_res.push_back(v);
+            v_res.push_back(num);
         }
         else{
             for(int i=k; i<=len; i++){ 
