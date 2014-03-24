@@ -1,4 +1,32 @@
 /*
+用递归
+*/
+class Solution {
+public:
+    void getCombination(vector<int> &S, int k, int start, int cur, vector<int> temp, vector<vector<int> > &res) {
+        if(cur == k) {
+            res.push_back(temp);
+            return;
+        }
+        for(int i=start; i<S.size(); i++) {
+            temp.push_back(S[i]);
+            getCombination(S, k, i+1, cur+1, temp, res);
+            temp.pop_back();
+        }
+    }
+    vector<vector<int> > subsets(vector<int> &S) {
+        vector<vector<int> > res;
+        vector<int> temp;
+        sort(S.begin(), S.end());
+        for(int i=0; i<= S.size(); i++) {
+            getCombination(S, i, 0, 0, temp, res);
+			temp.clear();
+        }
+        return res;
+    }
+};
+
+/*
 用STL的prev_permutation的解法
 */
 class Solution {

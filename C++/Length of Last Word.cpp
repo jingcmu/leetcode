@@ -16,6 +16,21 @@ public:
     }
 };
 
+Second try:
+class Solution {
+public:
+    int lengthOfLastWord(const char *s) {
+        int size = strlen(s);
+        int res = 0;
+        while(s[size-1] == ' ') size--;
+        while(size > 0 && s[size-1] != ' ') {
+            res++;
+            size--;
+        }
+        return res;
+    }
+};
+
 Other solution:
 //从前往后读, 实现比较猥琐，s++还是不++，非常绕
 class Solution {

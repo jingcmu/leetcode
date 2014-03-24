@@ -50,3 +50,54 @@ public:
         return biger_head;
     }
 };
+
+Second try:
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *partition(ListNode *head, int x) {
+        ListNode *small, *big, *small_ptr, *big_ptr;
+        small = big = small_ptr = big_ptr = NULL;
+        if(head == NULL) {
+            return NULL;
+        }
+        while(head) {
+            if(head->val < x) {
+                if(small == NULL) {
+                    small = small_ptr = head;
+                }
+                else {
+                    small_ptr->next = head;
+                    small_ptr = small_ptr->next;
+                }
+            }
+            else {
+                if(big == NULL) {
+                    big = big_ptr = head;
+                }
+                else {
+                    big_ptr->next = head;
+                    big_ptr = big_ptr->next;
+                }
+            }
+            head = head->next;
+        }
+        if(big != NULL) {
+            big_ptr->next = NULL;
+        }
+        if(small == NULL) {
+            return big;
+        }
+        else {
+            small_ptr->next = big;
+            return small;
+        }
+    }
+};

@@ -3,7 +3,7 @@ class Solution {
 public:
     int threeSumClosest(vector<int> &num, int target) {
         int len = num.size();
-        int sum = 0, target_2sum, head, tail;
+        int sum = 0, head, tail;
         int diff, diff_min = (1<<31)-1;
         if(len<=3){
             for(int i=0; i<len; i++){
@@ -14,7 +14,6 @@ public:
 		//ÏÈÅÅĞò
         sort(num.begin(),num.end());
         for(int i=0; i<len-2; i++){
-            target_2sum = target - num[i];
             head = i+1;
             tail = len-1;
 			//2sum×óÓÒ±Æ½ü

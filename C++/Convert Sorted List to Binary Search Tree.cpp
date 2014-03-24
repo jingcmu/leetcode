@@ -20,20 +20,19 @@
 每次把中间的点拿出来生成TreeNode，然后对两段链表进行递归
 */
 class Solution {
-private:
-    vector<int> v;
 public:
-    TreeNode *helper(int left, int right){
+    TreeNode *helper(int left, int right, vector<int> &v){
         if(left>right){
             return NULL;
         }
         int middle = (left+right)>>1; //中间节点坐标
         TreeNode *node = new TreeNode(v[middle]); //用中间节点构造TreeNode
-        node->left = helper(left,middle-1);
-        node->right = helper(middle+1,right);
+        node->left = helper(left,middle-1, v);
+        node->right = helper(middle+1,right, v);
+        return node;
     }
     TreeNode *sortedListToBST(ListNode *head) {
-        v.clear();
+        vector<int> v;
 		//先把ListNode都放到vector中
         while(head){
             v.push_back(head->val);
@@ -43,6 +42,6 @@ public:
         if(!len){
             return NULL;
         }
-        return helper(0, len-1);
+        return helper(0, len-1, v);
     }
 };
