@@ -39,3 +39,39 @@ public:
         return ret;
     }
 };
+
+
+Second Try:
+
+class Solution {
+public:
+    void helper(vector<vector<int> > &ret, vector<int> &count, int currentIndex, int len, int target, vector<int> &candidates){
+       if(currentIndex == len) {
+           if(target == 0) {
+               vector<int> temp;
+               for(int i=0; i<len; i++) {
+                   for(int j=0; j<count[i]; j++) {
+                      temp.push_back(candidates[i]);
+                   }
+               }
+               ret.push_back(temp);
+           }
+           return;
+       }
+       int num = target/candidates[currentIndex];
+       for(int i=0; i<=num; i++) {
+           count[currentIndex] = i;
+           helper(ret, count, currentIndex+1, len, target-i*candidates[currentIndex], candidates);
+       }
+    }
+
+    vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
+        int len = candidates.size();
+        vector<int> count(len, 0);
+        vector<vector<int> > ret;
+        sort(candidates.begin(), candidates.end());
+        if(len == 0) ret;
+        helper(ret, count, 0, len, target, candidates);
+        return ret;
+    }
+};
