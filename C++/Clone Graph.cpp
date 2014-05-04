@@ -57,3 +57,32 @@ public:
 private:
     unordered_map<UndirectedGraphNode *, UndirectedGraphNode *> m;
 };
+
+
+//use label as key to revise
+/**
+ * Definition for undirected graph.
+ * struct UndirectedGraphNode {
+ *     int label;
+ *     vector<UndirectedGraphNode *> neighbors;
+ *     UndirectedGraphNode(int x) : label(x) {};
+ * };
+ */
+class Solution {
+public:
+    UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
+        if(node == NULL) return NULL;
+        UndirectedGraphNode *new_node = new UndirectedGraphNode(node->label);
+        m[node->label] = new_node;
+        for(auto v: node->neighbors) {
+            if(m.find(v->label) != m.end()) {
+                new_node->neighbors.push_back(m[v->label]);
+                continue;
+            }
+            new_node->neighbors.push_back(cloneGraph(v));
+        }
+        return new_node;
+    }
+private:
+    unordered_map<int, UndirectedGraphNode*> m;
+};
