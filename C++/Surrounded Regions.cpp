@@ -73,3 +73,60 @@ private:
         }
     }
 };
+
+//Use make_pair to replace struct position, and improve the algorithm a little bit
+class Solution {
+public:
+    void solve(vector<vector<char>> &board) {
+        h = board.size();
+        if(h == 0) return;
+        w = board[0].size();
+        for(int i=0; i<h; i++) {
+            if(board[i][0] == 'O') {
+                q.push(make_pair(i,0));
+            }
+            if(board[i][w-1] == 'O') {
+                q.push(make_pair(i,w-1));
+            }
+        }
+        for(int i=0; i<w; i++) {
+            if(board[0][i] == 'O') {
+                q.push(make_pair(0, i));
+            }
+            if(board[h-1][i] == 'O') {
+                q.push(make_pair(h-1, i));
+            }
+        }
+        bfs(board);
+        for(int i=0; i<h; i++) {
+            for(int j=0; j<w; j++) {
+                if(board[i][j] == '*') {
+                    board[i][j] = 'O';
+                }
+                else if(board[i][j] == 'O') {
+                    board[i][j] = 'X';
+                }
+            }
+        }
+    }
+private:
+    int h, w;
+    queue<pair<int, int>> q;
+    void bfs(vector<vector<char>> &board) {
+        while(!q.empty()) {
+            pair<int, int> p = q.front();
+            q.pop();
+            board[p.first][p.second] = '*';
+            visit(board, p.first+1, p.second);
+            visit(board, p.first-1, p.second);
+            visit(board, p.first, p.second+1);
+            visit(board, p.first, p.second-1);
+        }
+    }
+    void visit(vector<vector<char>> &board, int y, int x) {
+        if(x<0 || x>w-1 || y<0 || y>h-1 || board[y][x] != 'O') {
+            return;
+        }
+        q.push(make_pair(y, x));
+    }
+};
