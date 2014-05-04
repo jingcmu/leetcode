@@ -30,3 +30,30 @@ public:
         return first_node;
     }
 };
+
+//a little improvement
+/**
+ * Definition for undirected graph.
+ * struct UndirectedGraphNode {
+ *     int label;
+ *     vector<UndirectedGraphNode *> neighbors;
+ *     UndirectedGraphNode(int x) : label(x) {};
+ * };
+ */
+class Solution {
+public:
+    UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
+        if(node == NULL) {
+            return NULL;
+        }
+        UndirectedGraphNode *new_node = new UndirectedGraphNode(node->label);
+        m[node] = new_node;
+        for(auto v: node->neighbors) { 
+            if(m.find(v) != m.end()) new_node->neighbors.push_back(m[v]);
+            else new_node->neighbors.push_back(cloneGraph(v));
+        }
+        return new_node;
+    }
+private:
+    unordered_map<UndirectedGraphNode *, UndirectedGraphNode *> m;
+};
