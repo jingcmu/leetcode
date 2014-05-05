@@ -1,3 +1,45 @@
+//actually, this is a better solution, better than the latter one
+//since it is much simple and easy to repeat
+class Solution {
+public:
+    bool isPalin(string &s) {
+        string s_r = s;
+        reverse(s.begin(), s.end());
+        return s_r == s;
+    }
+    
+    void partition(int start) {
+        if(start > len-1 ) {
+            res.push_back(path);
+            return;
+        }
+        for(int i=1; i<=len-start; i++) { // i is len
+            string str = s.substr(start, i);
+            if(isPalin(str)) {
+                path.push_back(str);
+                partition(start+i);
+                path.pop_back();
+            }
+        }
+    }
+    
+    vector<vector<string>> partition(string str) {
+        len = str.length();
+        s = str;
+        partition(0);
+        return res;
+    }
+    
+private:
+    int len;
+    string s;
+    vector<vector<string>> res;
+    vector<string> path;
+};
+
+
+
+
 //直接上最好的方法吧
 //因为这个题目要求对整个字符串进行各种划分，所以最好能够得到从任意i到j位置是否为回文的一个表
 //所以，上来先调用setIsPalin得到这个表
@@ -62,3 +104,5 @@ public:
 	想一下，如果要计算f[1][6]必须要知道f[2][5]，
 	f[2][5]的计算要知道f[3][4]，所以i是从后往前倒着求才行，
 	j的话没关系，本行之内没有依赖关系
+
+
