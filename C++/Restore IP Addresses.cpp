@@ -1,3 +1,47 @@
+//My solution is better than D's solution I think
+class Solution {
+public:
+    vector<string> restoreIpAddresses(string s) {
+        if(!remain_valid(s, 4)) return res;
+        dfs(s, "", 1);
+        return res;
+    }
+    
+private: 
+    vector<string> res;
+    void dfs(string s, string ip, int cur_index) {
+        string ip_r = ip;
+        if(cur_index == 4) {
+            if( valid(s) ) {
+                ip += s;
+                res.push_back(ip);
+            }
+            return;
+        }
+        for(int i=1; i<=min(3, (int)s.length()); i++) {
+            if( valid(s.substr(0,i)) && remain_valid(s.substr(i), 4 - cur_index) ) {
+                ip += (s.substr(0,i) + ".");
+                dfs(s.substr(i), ip, cur_index+1);
+                ip = ip_r;
+            }
+        }
+    }
+    
+    bool remain_valid(string s, int n) {
+        int len = s.length();
+        if(len > n*3 || len < n) return false;
+        return true;
+    }
+    
+    bool valid(string s) {
+        int num = atoi(s.c_str());
+        if(s[0] == '0' && s.length() > 1) return false;
+        if(num > 255) return false;
+        return true;
+    }
+};
+
+//D's solution:
 class Solution {
 public:
     vector<string> restoreIpAddresses(string s) {

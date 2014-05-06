@@ -106,3 +106,42 @@ public:
         return ret;  
     } 
 };
+
+//better solution
+class Solution {
+public:
+    vector<vector<string>> solveNQueens(int n) {
+        vector<string> board(n, string(n, '.'));
+        dfs(board, n, 0);
+        return res;
+    }
+    
+private:
+    vector<vector<string>> res;
+    void dfs(vector<string> &board,int n, int cur_row) {
+        if(cur_row == n) {
+            res.push_back(board);
+            return;
+        }
+        for(int i=0; i<n; i++) {
+            if(valid(board, i, cur_row, n)) {
+                board[cur_row][i] = 'Q';
+                dfs(board, n, cur_row+1);
+                board[cur_row][i] = '.';   
+            }
+        }
+    }
+    
+    bool valid(vector<string> &board, int x, int y, int n) {
+        for(int i=0; i<y; i++) {
+            if(board[i][x] == 'Q') return false;
+        }
+        for(int i=x+1,j=y-1; i<n&&j>=0; i++,j--) {
+            if(board[j][i] == 'Q') return false;
+        }
+        for(int i=x-1,j=y-1; i>=0&&j>=0; i--,j--) {
+            if(board[j][i] == 'Q') return false;
+        }
+        return true;
+    }
+};

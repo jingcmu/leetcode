@@ -1,3 +1,38 @@
+//a little improvement
+class Solution {
+public:
+    vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
+        size = candidates.size();
+        sort(candidates.begin(), candidates.end());
+        count.resize(size);
+        dfs(candidates, target, 0);
+        return res;
+    }
+private:
+    int size;
+    vector<int> count;
+    vector<vector<int>> res;
+    void dfs(vector<int> &candidates, int target, int index) {
+        if(index == size) {
+            if(target == 0) {
+                vector<int> vt;
+                for(int i=0; i<size; i++) {
+                    for(int j=0; j<count[i]; j++) {
+                        vt.push_back(candidates[i]);
+                    }
+                }
+                res.push_back(vt);
+            }
+            return;
+        }
+        int num = target/candidates[index];
+        for(int i=0; i<=num; i++) {
+            count[index] = i;
+            dfs(candidates, target - i*candidates[index], index+1);
+        }
+    }
+};
+
 //深度优先搜索
 //这一题用动归不好做，因为要记录
 class Solution {

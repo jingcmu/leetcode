@@ -33,27 +33,23 @@ public:
 //DFS + memoization
 class Solution {
 public:
-    int uniquePaths(int m, int n) {
-        w = m;
-        h = n;
-        f.resize(h+1);
-        for(int i=0; i<=h; i++) {
-            f[i].resize(w+1);
-        }
-        return dfs(1, 1);
-    }
+    int uniquePathsWithObstacles(vector<vector<int> > &obstacleGrid) {
+        int h = obstacleGrid.size();
+        if(h == 0) return 0;
+        int w = obstacleGrid[0].size();
+        vector<vector<int>> f(h+1, vector<int>(w+1, 0));
+        return dfs(w, h, obstacleGrid, f);
+    } 
 private:
-    int dfs(int x, int y) {
-        if(x > w || y > h) return 0;
-        if(x == w && y == h) {
-            return 1;
-        }
-        if(f[y][x]) return f[y][x];
+    int dfs(int x, int y, vector<vector<int> > &obstacleGrid, vector<vector<int>> &f) {
+        if(x < 1 || y < 1) return 0;
+        if(obstacleGrid[y-1][x-1] == 1) return 0;
+        if(x == 1 && y == 1) return 1;
+        if(f[y][x] != 0) return f[y][x];
         else {
-            f[y][x] = dfs(x+1, y) + dfs(x, y+1);
+            f[y][x] = dfs(x-1, y, obstacleGrid, f) + dfs(x, y-1, obstacleGrid, f);
             return f[y][x];
         }
     }
-    int w, h;
-    vector<vector<int>> f;
+    
 };
