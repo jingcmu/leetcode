@@ -1,3 +1,31 @@
+//a better solution: easier to understand
+class Solution {
+public:
+    vector<vector<int> > combinationSum2(vector<int> &num, int target) {
+        size = num.size();
+        sort(num.begin(), num.end());
+        dfs(0, target, path, num);
+        return res;
+    }
+private:
+    vector<vector<int>> res;
+    vector<int> path;
+    int size; 
+    void dfs(int cur_index, int target, vector<int> &path, vector<int> &num) {
+        if(target < 0) return;
+        if(target == 0) {
+            res.push_back(path);
+            return;
+        }
+        for(int i=cur_index; i<size; i++) {
+            path.push_back(num[i]);
+            dfs(i+1, target - num[i], path, num);
+            path.pop_back();
+            while(i<size-1 && num[i] == num[i+1]) i++; //skip all other same value in this layer
+        }
+    }
+};
+
 //1.这个写法太巧妙了！！！
 //每个元素是先取，再不取，不取的话，后面出现的重复元素也不取
 //取的话，后面递归进到下一级了，仍然可以取，这样就不必写复杂的判断
