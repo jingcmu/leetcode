@@ -1,3 +1,30 @@
+//Second Try: use C++11 to improve the code
+class Solution {
+public:
+    int trap(int height[], int size) {
+        auto h_max = max_element(height, height+size);
+        int max2now = 0, res = 0;
+        for(int i=0; i<h_max-height; i++) {
+            if(max2now < height[i]) {
+                max2now = height[i];
+            }
+            else {
+                res += (max2now - height[i]);
+            }
+        }
+        max2now = 0;
+        for(int i = size-1; i>h_max-height; i--) {
+            if(max2now < height[i]) {
+                max2now = height[i];
+            }
+            else {
+                res += (max2now - height[i]);
+            }
+        }
+        return res;
+    }
+};
+
 /*
 两种解法：
 对于每个柱子，找到其左右两边最高的柱子，该柱子能容纳的水就是

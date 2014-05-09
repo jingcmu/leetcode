@@ -1,4 +1,4 @@
-//Ì°ÐÄ·¨£¬Ã¿´Î×ßÄÜ×ßµÄ×îÔ¶µÄÒ»²½
+//贪心法
 class Solution {
 public:
     int jump(int A[], int n) {
@@ -15,6 +15,28 @@ public:
                     longest = i+A[i];
                 }
                 i++; 
+            }
+            step++;
+        }
+        return step;
+    }
+};
+
+//Second Try:
+//贪心法
+class Solution {
+public:
+    int jump(int A[], int n) {
+        int longest = 0;
+        int position = 0;
+        int step = 0;
+        while(position < n && longest < n-1) {
+            int l = longest;
+            while(position <= l) {
+                if(longest < position + A[position]) {
+                    longest = position + A[position];
+                }
+                position++;
             }
             step++;
         }
