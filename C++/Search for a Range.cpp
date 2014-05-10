@@ -32,7 +32,7 @@ public:
 	template<typename ForwardIterator, typename T>
 	ForwardIterator lower_bound (ForwardIterator first, ForwardIterator last, T target) {
 		while (first != last) {
-			auto mid = next(first, distance(first, last) / 2);
+			auto mid = first + distance(first, last)/2;
 			if (*mid < target) first = ++mid; 
 			else last = mid; //等于跟大于一样，都移动last
 		}

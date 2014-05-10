@@ -71,3 +71,33 @@ public:
 		return longest;
 	}
 };
+
+Third Try:
+class Solution {
+public:
+    int longestConsecutive(vector<int> &num) {
+        unordered_map<int, bool> m;
+        for(int i=0; i<num.size(); i++) {
+            m[num[i]] = true;
+        }
+        int max_res = 0, tmp = 0;
+        for(int i=0; i<num.size(); i++) {
+            if(m[num[i]]) {
+                m[num[i]] = false;
+                tmp = 1;
+                int right = num[i] + 1;
+                int left = num[i] - 1;
+                while(m.find(right) != m.end()) {
+                    m[right++] = false;
+                    tmp++;
+                }
+                while(m.find(left) != m.end()) {
+                    m[left--] = false;
+                    tmp++;
+                }
+                max_res = max(max_res, tmp);
+            }
+        }
+        return max_res;
+    }
+};

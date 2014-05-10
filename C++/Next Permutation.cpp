@@ -1,3 +1,29 @@
+Second Try:
+//a better solution
+class Solution {
+public:
+    void nextPermutation(vector<int> &num) {
+        int size = num.size();
+        int left, right;
+        for(right=size-1, left=right-1; left >=0; left--, right--) {
+            if(num[left] < num[right]) {
+                break;
+            }
+        }
+        if(left < 0) {
+            sort(num.begin(), num.end());
+            return;
+        }
+        for(int i=size-1; i>=right; i--) {
+            if(num[i] > num[left]) {
+                swap(num[i], num[left]);
+                break;
+            }
+        }
+        sort(num.begin()+right, num.end());
+    }
+};
+
 /*
 函数实现原理：
 在当前序列中，从尾端往前寻找两个相邻元素，前一个记为*i，后一个记为*ii，并且满足*i < *ii。

@@ -33,11 +33,18 @@ Second Try:
 class Solution {
 public:
     int searchInsert(int A[], int n, int target) {
-        int index = 0;
-        for(int i=0; i<n; i++) {
-            if(target > A[i]) index++;
-            else break;
+        int first = 0, last = n-1;
+        while(first != last) {
+            int mid = (first+last)/2;
+            if(A[mid] == target) return mid;
+            else if(A[mid] < target) {
+                if(target < A[mid+1]) return mid+1;
+                first = ++mid;
+            }
+            else {
+                last = mid;
+            }
         }
-        return index;
+        return A[first] >= target? first : first+1;
     }
 };

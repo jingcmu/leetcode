@@ -42,3 +42,43 @@ public:
         return v_res;
     }
 };
+
+//Second Try: use C++ template
+class Solution {
+public:
+    vector<vector<int> > threeSum(vector<int> &num) {       
+        if(num.size() < 3) return res;
+        sort(num.begin(), num.end());
+        for(int i=0; i<num.size()-2; i++) {
+            if(i != 0 && num[i] == num[i-1]) continue;
+            int target = 0 - num[i];
+            get2sum(target, next(num.begin(), i+1), prev(num.end()));
+        }
+        set<vector<int>> s(res.begin(), res.end());
+        res.assign(s.begin(), s.end());
+        return res;
+    }
+private:
+    vector<vector<int>> res;
+    template<typename ForwardIterator, typename T>
+    void get2sum(T target, ForwardIterator begin, ForwardIterator end) {
+        vector<T> threesum;
+        while(begin < end) {
+            if(*begin + *end == target) {
+                threesum.push_back(0-target);
+                threesum.push_back(*begin);
+                threesum.push_back(*end);
+                begin++;
+                end--;
+                res.push_back(threesum);
+                threesum.clear();
+            }
+            else if(*begin + *end < target) {
+                begin++;
+            }
+            else {
+                end--;
+            }
+        }
+    }
+};
