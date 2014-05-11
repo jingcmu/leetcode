@@ -1,3 +1,35 @@
+//Second try:
+class Solution {
+public:
+    vector<int> twoSum(vector<int> &numbers, int target) {
+        int size = numbers.size();
+        vector<int> num = numbers;
+        vector<int> v_res;
+        if(size == 0) return v_res;
+        sort(numbers.begin(), numbers.end());
+        int begin = 0, end = size-1;
+        while(begin < end) {
+            if(numbers[begin] + numbers[end] < target) {
+                begin++;
+            }
+            else if(numbers[begin] + numbers[end] > target) {
+                end--;
+            }
+            else {
+                v_res.push_back(find(num.begin(), num.end(), numbers[begin])-num.begin()+1);
+                if(numbers[begin] == numbers[end]) {
+                    v_res.push_back(find(num.begin()+v_res[0], num.end(), numbers[end])-num.begin()+1);
+                }
+                else v_res.push_back(find(num.begin(), num.end(), numbers[end])-num.begin()+1);
+                sort(v_res.begin(), v_res.end());
+                break;
+            }
+        }
+        return v_res;
+    }
+};
+
+
 /*两头逼近的方法*/
 class Solution {
 public:
