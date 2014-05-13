@@ -1,18 +1,12 @@
 /*
-ÕâÒ»ÌâÖ÷Òª¿¼²ì¶ÔÊı¾İ½á¹¹ÌØĞÔµÄÁË½â
-getº¯ÊıÏÔÈ»Ó¦¸ÃÒÔO(1)µÄ¸´ÔÓ¶ÈÊµÏÖ£¬ÄÇÃ´Ö»ÄÜÓÃunordered_map
-¶øÇÒ ÕâÀïmapÀïÃæ´æµÄÊÇlistµÄµü´úÆ÷£¡£¡£¡
-getº¯ÊıÒª×öµÄÊÂÇéÊÇ£ºÔÚmapÀï²éÕÒkey£¬Èç¹ûÕÒ²»µ½¾Í·µ»Ø-1£»
-Èç¹ûÕÒµ½ÁË£¬¾Í°Ñµ±Ç°·ÃÎÊµÄ½Úµã·Åµ½list×îÇ°Ãæ£¬·µ»Øµ±Ç°Öµ
-setº¯ÊıĞèÒª¾­³£É¾³ı¡¢²åÈë£¬ËùÒÔĞèÒªÒ»¸öÁ´±í£¬ÔÚstlÖĞµ±È»ÊÇlistÁË
-setº¯ÊıÒª×öµÄÊÂÇéÊÇ£º
+è¿™ä¸€é¢˜ä¸»è¦è€ƒå¯Ÿå¯¹æ•°æ®ç»“æ„ç‰¹æ€§çš„äº†è§£
+getå‡½æ•°æ˜¾ç„¶åº”è¯¥ä»¥O(1)çš„å¤æ‚åº¦å®ç°ï¼Œé‚£ä¹ˆåªèƒ½ç”¨unordered_map
+è€Œä¸” è¿™é‡Œmapé‡Œé¢å­˜çš„æ˜¯listçš„è¿­ä»£å™¨ï¼ï¼ï¼
+getå‡½æ•°è¦åšçš„äº‹æƒ…æ˜¯ï¼šåœ¨mapé‡ŒæŸ¥æ‰¾keyï¼Œå¦‚æœæ‰¾ä¸åˆ°å°±è¿”å›-1ï¼›
+å¦‚æœæ‰¾åˆ°äº†ï¼Œå°±æŠŠå½“å‰è®¿é—®çš„èŠ‚ç‚¹æ”¾åˆ°listæœ€å‰é¢ï¼Œè¿”å›å½“å‰å€¼
+setå‡½æ•°éœ€è¦ç»å¸¸åˆ é™¤ã€æ’å…¥ï¼Œæ‰€ä»¥éœ€è¦ä¸€ä¸ªé“¾è¡¨ï¼Œåœ¨stlä¸­å½“ç„¶æ˜¯listäº†
+setå‡½æ•°è¦åšçš„äº‹æƒ…æ˜¯ï¼š
 */
-struct CacheNode{
-    int key;
-    int value;
-    CacheNode(int k, int v): key(k), value(v) {}
-};
-
 class LRUCache{
     
 public:
@@ -21,37 +15,38 @@ public:
     }
     
     int get(int key) {
-        if(cacheMap.find(key) == cacheMap.end()){ //cacheMap[key] == 0
+        if(cacheMap.find(key) == cacheMap.end()) {
             return -1;
         }
-		//¼ÙÈçÔÚmapÖĞÕÒµ½ÁËkey: 1.°Ñ½Úµã·Åµ½Á´±íÍ·, 2.¸üĞÂmapÖĞµÄ¼ÇÂ¼, 3.·µ»Øvalue
-        else { 
-			//°ÑcacheListµÄcacheMap[key]Î»ÖÃµÄµã²åÈëµ½cacheList.begin()
-            cacheList.splice(cacheList.begin(), cacheList, cacheMap[key]); 
-            cacheMap[key] = cacheList.begin();//¸üĞÂmapÖĞµÄ¼ÇÂ¼
-            return cacheList.front().value; //·µ»Øvalue
+        //å‡å¦‚åœ¨mapä¸­æ‰¾åˆ°äº†key: 1.æŠŠèŠ‚ç‚¹æ”¾åˆ°é“¾è¡¨å¤´, 2.è¿”å›value
+        else {
+            cacheList.splice(cacheList.begin(), cacheList, cacheMap[key]);
+            return cacheMap[key]->second;
         }
     }
     
     void set(int key, int value) {
-		//Ã»ÓĞÕÒµ½½Úµã: 1.²åÈë½Úµã²¢¸üĞÂlistºÍmap, 2.Òª¼ì²éÊÇ·ñÒÑÂú
-        if(cacheMap.find(key) == cacheMap.end()) {    
-            if(cacheList.size() == capacity){ //ÒÑÂú, É¾³ıÄ©Î²µÄ½Úµã
-                cacheMap.erase(cacheList.back().key); //mapÒªÏÈµ÷Õû
-                cacheList.pop_back();   
-            }
-            //ĞÂ½Úµã²åµ½Í·²¿, µ÷Õûmap
-            cacheList.push_front(CacheNode(key, value));
-            cacheMap[key] = cacheList.begin(); //¸üĞÂ½ÚµãÎ»ÖÃ
-        }
-        else{   //ÕÒµ½½ÚµãµÄ»°, Ö»ĞèÒª°Ñ½Úµãµ÷Õûµ½Í·²¿, ¸üĞÂmap
+        //æ‰¾åˆ°èŠ‚ç‚¹ï¼Œæ›´æ–°listä½ç½®å’Œå€¼
+        if(cacheMap.find(key) != cacheMap.end()) {
             cacheList.splice(cacheList.begin(), cacheList, cacheMap[key]);
-            cacheMap[key] = cacheList.begin(); //¸üĞÂmap
-            cacheMap[key]->value = value;   //¸üĞÂvalue
+            cacheList.begin()->second = value;
+        }
+        //å¦åˆ™ï¼Œ
+        else {
+            //è‹¥cacheå·²æ»¡ï¼Œåˆ™åˆ é™¤æœ€åä¸€ä¸ªèŠ‚ç‚¹ï¼ˆList and Mapï¼‰
+            if(cacheList.size() == capacity) {
+                int key = cacheList.back().first;
+                cacheMap.erase(key);
+                cacheList.pop_back();
+            }
+            //å°†æ–°èŠ‚ç‚¹æ’å…¥Listå’ŒMap
+            cacheList.push_front(make_pair(key, value));
+            cacheMap[key] = cacheList.begin();
         }
     }
+    
 private:
     int capacity;
-    list<CacheNode> cacheList;
-    unordered_map<int, list<CacheNode>::iterator> cacheMap;  //mapÀïÃæ´æµÄÊÇ<key, ½ÚµãÎ»ÖÃ(µü´úÆ÷)>
+    list<pair<int,int>> cacheList;
+    unordered_map<int, list<pair<int,int>>::iterator> cacheMap;
 };

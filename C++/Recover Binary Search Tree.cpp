@@ -9,27 +9,27 @@
 */
 
 /*
-O(n) ¿Õ¼äµÄ½â·¨ÊÇ£¬¿ªÒ»¸öÖ¸ÕëÊý×é£¬ÖÐÐò±éÀú£¬½«½ÚµãÖ¸ÕëÒÀ´Î´æ·Åµ½Êý×éÀï£¬È»ºóÑ°ÕÒÁ½
-´¦ÄæÏòµÄÎ»ÖÃ£¬ÏÈ´ÓÇ°ÍùºóÕÒµÚÒ»¸öÄæÐòµÄÎ»ÖÃ£¬È»ºó´ÓºóÍùÇ°ÕÒµÚ¶þ¸öÄæÐòµÄÎ»ÖÃ£¬½»»»ÕâÁ½¸ö
-Ö¸ÕëµÄÖµ¡£
+O(n) ç©ºé—´çš„è§£æ³•æ˜¯ï¼Œå¼€ä¸€ä¸ªæŒ‡é’ˆæ•°ç»„ï¼Œä¸­åºéåŽ†ï¼Œå°†èŠ‚ç‚¹æŒ‡é’ˆä¾æ¬¡å­˜æ”¾åˆ°æ•°ç»„é‡Œï¼Œç„¶åŽå¯»æ‰¾ä¸¤
+å¤„é€†å‘çš„ä½ç½®ï¼Œå…ˆä»Žå‰å¾€åŽæ‰¾ç¬¬ä¸€ä¸ªé€†åºçš„ä½ç½®ï¼Œç„¶åŽä»ŽåŽå¾€å‰æ‰¾ç¬¬äºŒä¸ªé€†åºçš„ä½ç½®ï¼Œäº¤æ¢è¿™ä¸¤ä¸ª
+æŒ‡é’ˆçš„å€¼ã€‚
 */
 
 /*
-O(log n) ¿Õ¼äµÄ½â·¨ÈçÏÂ£º
-ÓÃµÝ¹éÖÐÐò±éÀú£¬ÖÐÐò±éÀúµÄÌØµãÊÇÔªËØ·ÃÎÊÊÇ°´ÕÕ´ÓÐ¡µ½´ó±»·ÃÎÊµÄ£¬Èç¹ûÅöµ½Ò»¸öÄæÐòµÄ£¬
-ÔòÕâ¸öÄæÐòµÄÁ½¸öµãÓÐÒ»¸ö¿Ï¶¨ÊÇ´íÁËµÄ£¬ÄÇÃ´µ½µ×ÊÇÄÄ¸öÄØ£¿
-´ÓÖÐÐò±éÀúµÄÌØµã¿ÉÖª£¬µÚÒ»¸ö´íÎóµÄ½Úµã¿Ï¶¨ÊÇÄæÐò¶ÔÖÐµÄ½Ï´óµÄ£¬µÚ¶þ¸öÔòÊÇÄæÐò¶ÔÖÐ½ÏÐ¡µÄ
+O(log n) ç©ºé—´çš„è§£æ³•å¦‚ä¸‹ï¼š
+ç”¨é€’å½’ä¸­åºéåŽ†ï¼Œä¸­åºéåŽ†çš„ç‰¹ç‚¹æ˜¯å…ƒç´ è®¿é—®æ˜¯æŒ‰ç…§ä»Žå°åˆ°å¤§è¢«è®¿é—®çš„ï¼Œå¦‚æžœç¢°åˆ°ä¸€ä¸ªé€†åºçš„ï¼Œ
+åˆ™è¿™ä¸ªé€†åºçš„ä¸¤ä¸ªç‚¹æœ‰ä¸€ä¸ªè‚¯å®šæ˜¯é”™äº†çš„ï¼Œé‚£ä¹ˆåˆ°åº•æ˜¯å“ªä¸ªå‘¢ï¼Ÿ
+ä»Žä¸­åºéåŽ†çš„ç‰¹ç‚¹å¯çŸ¥ï¼Œç¬¬ä¸€ä¸ªé”™è¯¯çš„èŠ‚ç‚¹è‚¯å®šæ˜¯é€†åºå¯¹ä¸­çš„è¾ƒå¤§çš„ï¼Œç¬¬äºŒä¸ªåˆ™æ˜¯é€†åºå¯¹ä¸­è¾ƒå°çš„
 */
 class Solution { 
 public : 
     TreeNode *first, *second, *pre; 
     void inorder(TreeNode *root) {  
-		if(root->left) inorder(root->left);
-		if(pre == NULL) pre = root;
-		else if(pre->val > root->val) {
-            if(first == NULL)   //Èç¹ûfirst»¹Ã»±»¸³Öµ£¬Ôò½«´óµÄÄÇ¸ö¸³¸øfirst
+        if(root->left) inorder(root->left);
+        if(pre == NULL) pre = root;
+        else if(pre->val > root->val) {
+            if(first == NULL)   //å¦‚æžœfirstè¿˜æ²¡è¢«èµ‹å€¼ï¼Œåˆ™å°†å¤§çš„é‚£ä¸ªèµ‹ç»™first
                 first = pre;    
-            second = root; //Èç¹ûfirstÒÑ¾­¸³Öµ¹ýÁË£¬Ôò½«Ð¡µÄÄÇ¸ö¸³¸øsecond
+            second = root; //å¦‚æžœfirstå·²ç»èµ‹å€¼è¿‡äº†ï¼Œåˆ™å°†å°çš„é‚£ä¸ªèµ‹ç»™second
         } 
         pre = root; 
         if(root->right) inorder(root->right); 
@@ -38,10 +38,45 @@ public :
         if(!root) return;
         first = second = pre = NULL; 
         inorder(root);
-        swap(first->val, second->val); //½»»»Á½¸ö´íÎó½Úµã
+        swap(first->val, second->val); //äº¤æ¢ä¸¤ä¸ªé”™è¯¯èŠ‚ç‚¹
     }
 };  
 
 /*
-O(1) ¿Õ¼äµÄ½â·¨£ºMorris ÖÐÐò±éÀú
+O(1) ç©ºé—´çš„è§£æ³•ï¼šMorris ä¸­åºéåŽ†
 */
+
+Second Try:
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    void recoverTree(TreeNode *root) {
+        if(root == nullptr) return;
+        first = second = pre = nullptr;
+        inorder(root);
+        swap(first->val, second->val);
+    }
+private:
+    TreeNode *first, *second, *pre;
+    void inorder(TreeNode *root) {
+        if(root->left) inorder(root->left);
+        if(pre != nullptr) {
+            if(pre->val > root->val) {
+                if(first == nullptr) {
+                    first = pre;
+                }
+                second = root;
+            }
+        }
+        pre = root;
+        if(root->right) inorder(root->right);
+    }
+};
