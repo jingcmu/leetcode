@@ -1,3 +1,29 @@
+Second Try:
+class Solution {
+public:
+    vector<vector<int> > generate(int numRows) {
+        vector<int> v;
+        if(numRows == 0) {
+            return res;
+        }
+        v.push_back(1);
+        res.push_back(v);
+        for(int i=1; i<numRows; i++) {
+            v.clear();
+            v.push_back(1);
+            for(int j = 1; j<i; j++) {
+                v.push_back(res.back()[j]+res.back()[j-1]);
+            }
+            v.push_back(1);
+            res.push_back(v);
+        }
+        return res;
+        
+    }
+private:
+    vector<vector<int>> res;
+};
+
 class Solution {
 public:
     vector<vector< int> > generate( int numRows) {

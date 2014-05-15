@@ -51,3 +51,60 @@ public:
         return res;
     }
 };
+
+Second Try:
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
+        ListNode res(-1);
+        if(l1 == nullptr) return l2;
+        if(l2 == nullptr) return l1;
+        int carry = 0;
+        ListNode *ptr = &res;
+        while(l1 || l2) {
+            if(l1 == nullptr) {
+                if(carry == 0) {
+                    ptr->next = l2;
+                    break;
+                }
+                else {
+                    ptr->next = new ListNode((l2->val+carry)%10);
+                    carry = (l2->val+carry)/10;
+                    ptr = ptr->next;
+                    l2 = l2->next;
+                    continue;
+                }
+            }
+            if(l2 == nullptr) {
+                if(carry == 0) {
+                    ptr->next = l1;
+                    break;
+                }
+                else {
+                    ptr->next = new ListNode((l1->val+carry)%10);
+                    carry = (l1->val+carry)/10;
+                    ptr = ptr->next;
+                    l1 = l1->next;
+                    continue;
+                }
+            }
+            ptr->next = new ListNode((l1->val + l2->val + carry)%10);
+            carry = (l1->val + l2->val + carry)/10;
+            ptr = ptr->next;
+            l2 = l2->next;
+            l1 = l1->next;
+        }
+        if(carry) {
+            ptr->next = new ListNode(1);
+        }
+        return res.next;
+    }
+};

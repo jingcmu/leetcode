@@ -33,3 +33,18 @@ public:
         return true;
     }
 };
+
+//Second Try:
+class Solution {
+public:
+    bool isBalanced(TreeNode *root) {
+        if(root == nullptr) return true;
+        if(abs(getHeight(root->left) - getHeight(root->right)) > 1) return false;
+        return isBalanced(root->right) && isBalanced(root->left);
+    }
+private:
+    int getHeight(TreeNode *root) {
+        if(root == nullptr) return 0;
+        return max(getHeight(root->left), getHeight(root->right)) + 1;
+    }
+};

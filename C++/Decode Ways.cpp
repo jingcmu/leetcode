@@ -31,3 +31,27 @@ public:
         return v[len];
     }
 };
+
+//Second try:
+class Solution {
+public:
+    int numDecodings(string s) {
+        int size = s.length();
+        if(size == 0 || s[0] == '0') return 0;
+        vector<int> res(size+1, 0);
+        res[0] = 1; res[1] = 1;
+        for(int i=2; i<=size; i++) {
+            if((s[i-2] == '0' || s[i-2] > '2') && s[i-1] == '0') return 0;
+            if((s[i-2] == '2' || s[i-2] == '1') && s[i-1] == '0') {
+                res[i] = res[i-2];
+            }
+            else if((s[i-2] == '1') || (s[i-2] == '2' && s[i-1] >= '1' && s[i-1] <= '6')) {
+                res[i] = res[i-1] + res[i-2];
+            }
+            else {
+                res[i] = res[i-1];
+            }
+        }
+        return res[size];
+    }
+};
