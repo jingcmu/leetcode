@@ -11,13 +11,13 @@ public:
     ListNode *insertionSortList(ListNode *head) {
         ListNode *cur, *cur_left = head, *ptr_left, *ptr;
 		bool flag;
-        if(!head || !head->next){ //0个或1个节点的情况
+        if(!head || !head->next){ //return if null or single node
             return head;
         }
         cur = cur_left->next;
         while(cur) {
 			flag = true;
-            if(cur->val < head->val) {
+            if(cur->val < head->val) { //see whether insert to the head
                 cur_left->next = cur->next;
                 cur->next = head;
                 head = cur;
@@ -27,7 +27,7 @@ public:
             ptr_left = head;
             ptr = ptr_left->next;
             while(cur && ptr != cur) {
-                if(cur->val < ptr->val){
+                if(cur->val < ptr->val){ //find a place to insert
                     cur_left->next = cur->next;
                     cur->next = ptr;
                     ptr_left->next = cur;
@@ -38,7 +38,7 @@ public:
                 ptr_left = ptr_left->next;
                 ptr = ptr_left->next;
             }
-			if(flag){
+			if(flag) { //see whether insert to the tail
 				cur_left = cur_left->next;
 				if(cur_left){
 					cur = cur_left->next;
