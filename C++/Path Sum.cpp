@@ -30,3 +30,23 @@ public:
         return hasPathSum(root, sum, sumToNow);
     }
 };
+
+Second Try:
+class Solution {
+public:
+    bool hasPathSum(TreeNode *root, int sum) {
+        if(root == nullptr) return false;
+        return helper(root, sum, 0);
+    }
+private: 
+    bool helper(TreeNode *node, int sum, int curSum) {
+        if(node == nullptr) {
+            return false;
+        }
+        if(node->right == node->left && curSum + node->val == sum) {
+            return true;
+        }
+        return helper(node->right, sum, curSum + node->val) ||
+                helper(node->left, sum, curSum + node->val);
+    }
+};

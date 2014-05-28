@@ -48,3 +48,39 @@ public:
         return head;
     }
 };
+
+//Second Try: Much easier way to implement
+class Solution {
+public:
+    ListNode *insertionSortList(ListNode *head) {
+        ListNode *cur, *cur_left = head, *ptr_left, *ptr;
+        if(!head || !head->next){ //return if null or single node
+            return head;
+        }
+        ListNode Node(-1);
+        Node.next = head;
+        cur = cur_left->next; //cur init to second node
+        while(cur) {
+            ptr_left = &Node;
+            ptr = ptr_left->next;
+            while(ptr != cur) {
+                if(cur->val < ptr->val){ //find a place to insert
+                    cur_left->next = cur->next;
+                    cur->next = ptr;
+                    ptr_left->next = cur;
+                    cur = cur_left->next;
+                    break;
+                }
+                ptr_left = ptr_left->next;
+                ptr = ptr_left->next;
+            }
+            if(cur == ptr) { //see whether insert to the tail
+                cur_left = cur_left->next;
+                if(cur_left){
+                    cur = cur_left->next;
+                }
+            }
+        }
+        return Node.next;
+    }
+};

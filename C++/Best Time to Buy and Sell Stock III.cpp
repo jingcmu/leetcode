@@ -1,24 +1,26 @@
 /*
-Ë¼Â·£ºO(nÆ½·½)µÄ·½·¨£¬¶ÔÃ¿¸öµã½øÐÐ·Ö¸î£¬Ëã³öÕâ¸öµãÁ½±ßµÄ×î´óÀûÈóÏà¼Ó
-O(n)µÄ·½·¨£¬ÏÈÕýÏòËã³ö´ÓÆðµã¿ªÊ¼µ½Ã¿¸öµãµÄ×î´óÀûÈó£¬ÔÙÄæÏòËã³ö´ÓÃ¿¸öµã¿ªÊ¼µ½ÖÕµãµÄ×î´óÀûÈó
-½ø¶ø¾ÍµÃ³öÁË×î´óÀûÈó£¬ÒÔµÚiµã½øÐÐ·Ö¸î£¬iµã²»¿ÉÄÜÍ¬Ê±ÎªÇ°¶ÎµÄÖÕµãºÍºó¶ÎµÄÆðµã£¬ËùÒÔ²»ÓÃµ£ÐÄ
+æ€è·¯ï¼šO(nå¹³æ–¹)çš„æ–¹æ³•ï¼Œå¯¹æ¯ä¸ªç‚¹è¿›è¡Œåˆ†å‰²ï¼Œç®—å‡ºè¿™ä¸ªç‚¹ä¸¤è¾¹çš„æœ€å¤§åˆ©æ¶¦ç›¸åŠ 
+O(n)çš„æ–¹æ³•ï¼Œå…ˆæ­£å‘ç®—å‡ºä»Žèµ·ç‚¹å¼€å§‹åˆ°æ¯ä¸ªç‚¹çš„æœ€å¤§åˆ©æ¶¦ï¼Œå†é€†å‘ç®—å‡ºä»Žæ¯ä¸ªç‚¹å¼€å§‹åˆ°ç»ˆç‚¹çš„æœ€å¤§åˆ©æ¶¦
+è¿›è€Œå°±å¾—å‡ºäº†æœ€å¤§åˆ©æ¶¦ï¼Œä»¥ç¬¬iç‚¹è¿›è¡Œåˆ†å‰²ï¼Œiç‚¹ä¸å¯èƒ½åŒæ—¶ä¸ºå‰æ®µçš„ç»ˆç‚¹å’ŒåŽæ®µçš„èµ·ç‚¹ï¼Œæ‰€ä»¥ä¸ç”¨æ‹…å¿ƒ
 */
 class Solution {
 public:
     int maxProfit(vector<int> &prices) 
 	{
 		vector<int> profit(prices.size());
-		int min_price = INT_MAX;
-		//ÏÈµÃµ½´Ó×óµ½ÓÒµÄ×î´óÀûÈó(Æðµã¹Ì¶¨)
+		int min_price = INT_MAX,  max_profit = 0;
+		//å…ˆå¾—åˆ°ä»Žå·¦åˆ°å³çš„æœ€å¤§åˆ©æ¶¦(èµ·ç‚¹å›ºå®š)
 		for (int i = 0; i < prices.size(); i++) {
-			if (prices[i] < min_price) min_price = prices[i]; //¸üÐÂ×óÆð×îÐ¡price
-			profit[i] = max(profit[i], prices[i]-min_price); //¸üÐÂ×î´óÀûÈó
+			if (prices[i] < min_price) min_price = prices[i]; //æ›´æ–°å·¦èµ·æœ€å°price
+			else  max_profit = max(max_profit, prices[i] - min_price);
+			profit[i] = max_profit; //æ›´æ–°æœ€å¤§åˆ©æ¶¦
 		}
-		//ÔÙµÃµ½´ÓÓÒµ½×óµÄ×î´óÀûÈó(ÖÕµã¹Ì¶¨)
-		int max_price = INT_MIN , max_profit = 0, res = 0;
+		//å†å¾—åˆ°ä»Žå³åˆ°å·¦çš„æœ€å¤§åˆ©æ¶¦(ç»ˆç‚¹å›ºå®š)
+		int max_price = INT_MIN , res = 0;
+		max_profit = 0;
 		for (int i = prices.size() - 1; i >= 0 ; i--) {
-			if (prices[i] > max_price) max_price = prices[i]; //¸üÐÂÓÒÆð×î´óprice
-			else max_profit = max(max_profit, max_price - prices[i]); //¸üÐÂ×î´óÀûÈó
+			if (prices[i] > max_price) max_price = prices[i]; //æ›´æ–°å³èµ·æœ€å¤§price
+			else max_profit = max(max_profit, max_price - prices[i]); //æ›´æ–°æœ€å¤§åˆ©æ¶¦
 			res = max(profit[i]+ max_profit, res); 
 		}
 		return res;
