@@ -76,3 +76,27 @@ public:
         return res;
     }
 };
+
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode *root) {
+        if (root == nullptr) {
+            return res_;
+        }
+        inorderTraversal(root->left);
+        res_.push_back(root->val);
+        inorderTraversal(root->right);
+        return res_;
+    }
+private:
+    vector<int> res_;
+};
