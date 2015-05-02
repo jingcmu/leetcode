@@ -10,16 +10,16 @@ class Solution:
     # @return a list of integers
     def preorderTraversal(self, root):
         res = []
-        d = []
+        stack = []
         if root == None:
             return res
-        d.append(root)
-        while len(d) != 0:
-            node = d.pop()
+        stack.append(root)
+        while len(stack) != 0:
+            node = stack.pop()
             res.append(node.val)
             if node.right != None:
-                d.append(node.right)
+                stack.append(node.right)
             if node.left != None:
-                d.append(node.left)
+                stack.append(node.left)
         return res
             

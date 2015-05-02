@@ -26,7 +26,6 @@ public:
         for(int i=0; i<node->neighbors.size(); i++){
             first_node->neighbors.push_back(cloneGraph(node->neighbors[i]));
         }
-        
         return first_node;
     }
 };
@@ -48,7 +47,7 @@ public:
         }
         UndirectedGraphNode *new_node = new UndirectedGraphNode(node->label);
         m[node] = new_node;
-        for(auto v: node->neighbors) { 
+        for(auto v: node->neighbors) {
             if(m.find(v) != m.end()) new_node->neighbors.push_back(m[v]);
             else new_node->neighbors.push_back(cloneGraph(v));
         }

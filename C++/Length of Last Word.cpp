@@ -43,7 +43,7 @@ public:
 			else if (*s && *s != ' ')//如果遇到空格，再次遇到不是空格的len清零
 				len = 0;
 		}
-		return len; 
+		return len;
 	}
 };
 
@@ -54,7 +54,7 @@ public:
 		const string str(s);
 		//从后往前找第一个字母
 		auto first = find_if(str.rbegin(), str.rend(), ::isalpha);
-		//从最后一个字母往前找第一个非字母
+		//从最后一字母往前找第一个非字母
 		auto last = find_if_not(first, str.rend(), ::isalpha);
 		//计算两者差距
 		return distance(first, last);

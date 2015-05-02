@@ -11,7 +11,7 @@ public:
         for(int i=1; i<size; i++){
            if(ratings[i] > ratings[i-1]){
                candy[i] = candy[i-1] + 1;
-           } 
+           }
         }
         int res = candy[size-1];
 		//ÔÙ´ÓÓÒÏò×óÉ¨Ãè
