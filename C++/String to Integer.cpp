@@ -1,35 +1,70 @@
-//´¿Ï¸½ÚÌâ
+class Solution {
+public:
+    int myAtoi(string str) {
+        bool sign = true;
+        int sign_num = 0, start;
+        long long res = 0;
+        for (int i = start; i < str.length(); ++i) {
+            if (str[start] == ' ')
+                start++;
+        }
+        for (int i = start; i < str.length(); ++i) {
+            if (str[i] == '-') {
+                sign = false;
+                sign_num++;
+                continue;
+            } else if (str[i] == '+') {
+                sign = true;
+                sign_num++;
+                continue;
+            }
+            if (sign_num > 1) return 0;
+            if (str[i] >= '0' && str[i] <= '9') {
+                res = res * 10 + (str[i] - '0');
+                if (res > INT_MAX) {
+                    return sign ? INT_MAX : INT_MIN;
+                } 
+            }
+            else {
+                return sign ? res : 0 - res;
+            }
+        }
+        return sign ? res : 0 - res;
+    }
+};
+
+//çº¯ç»†èŠ‚é¢˜
 class Solution {
 public:
     int atoi(const char *str) {
         int len = strlen(str), i = 0;
         long long value = 0;
         bool b_negative = false;
-		//ÏÈ°ÑÇ°µ¼¿Õ¸ñ¶¼È¥µô
+		//å…ˆæŠŠå‰å¯¼ç©ºæ ¼éƒ½å»æ‰
         while(str[i] == ' ') i++;
-		//ÔÙÅĞ¶ÏµÚÒ»¸ö×Ö·ûÊÇ²»ÊÇ·ûºÅ
+		//å†åˆ¤æ–­ç¬¬ä¸€ä¸ªå­—ç¬¦æ˜¯ä¸æ˜¯ç¬¦å·
         if(str[i] == '-' || str[i] == '+'){
             if(str[i] == '-') {
                 b_negative = true;
             }
             i++;
         }
-		//°ÑÇ°µ¼0¶¼È¥µô
+		//æŠŠå‰å¯¼0éƒ½å»æ‰
         while(str[i] == '0') i++;
-		//¶ÔÃ¿¸ö×Ö·ûÑ­»·£¬Óöµ½·ÇÊı×Ö¾Í½áÊø
+		//å¯¹æ¯ä¸ªå­—ç¬¦å¾ªç¯ï¼Œé‡åˆ°éæ•°å­—å°±ç»“æŸ
         for(; i<len; i++){
             if(str[i] < '0' || str[i] > '9'){
                 break;
             }
             value = value*10+str[i]-'0';
-			//ÅĞ¶ÏÊÇ·ñÒç³ö
+			//åˆ¤æ–­æ˜¯å¦æº¢å‡º
             if(value > INT_MAX){
                 return b_negative? INT_MIN : INT_MAX;
             }
         }
-		//Èç¹ûÊÇ¸º2147483648Ôò·µ»Ø-2147483648
+		//å¦‚æœæ˜¯è´Ÿ2147483648åˆ™è¿”å›-2147483648
         if(b_negative && (value == 2147483648)) return INT_MIN;
-		//·ñÔò¸ù¾İ·ûºÅ·µ»Ø
+		//å¦åˆ™æ ¹æ®ç¬¦å·è¿”å›
         return b_negative? 0-value:value;
     }
 };
