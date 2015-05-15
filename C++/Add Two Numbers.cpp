@@ -1,3 +1,31 @@
+2015/5/14
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode l3(-1);
+        ListNode* ptr = &l3;
+        int carry = 0;
+        while (l1 || l2) {
+            int left = 0, right = 0;
+            if (l1 != nullptr) {
+                left = l1->val;
+                l1 = l1->next;
+            }
+            if (l2 != nullptr) {
+                right = l2->val;
+                l2 = l2->next;
+            }
+            ptr->next = new ListNode((left + right + carry) % 10);
+            carry = (left + right + carry) / 10;
+            ptr = ptr->next;
+        }
+        if (carry) {
+            ptr->next = new ListNode(1);
+        }
+        return l3.next;
+    }
+};
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -7,9 +35,9 @@
  * };
  */
  /*
- Ë¼Â·£º¿¼²ì»ù±¾µÄÁ´±í²Ù×÷£¬Ò»ÖÖ²»Ì«ºÃµÄ×ö·¨ÊÇÁíÍâ·ÖÅäÒ»¸ö¿Õ¼ä·Å½á¹û£¬
- ÎÒ¾ö¶¨²»Ê¹ÓÃ¶îÍâ¿Õ¼ä£¬ ËùÒÔµÚÒ»´ÎÐ´ÁË70¶àÐÐ´úÂë²ÅAC£¬
- ºóÀ´¾­¹ý¸Ä½ø£¬¾Í±ä³ÉÁËÏÂÃæµÄ40¶àÐÐ´úÂë
+ æ€è·¯ï¼šè€ƒå¯ŸåŸºæœ¬çš„é“¾è¡¨æ“ä½œï¼Œä¸€ç§ä¸å¤ªå¥½çš„åšæ³•æ˜¯å¦å¤–åˆ†é…ä¸€ä¸ªç©ºé—´æ”¾ç»“æžœï¼Œ
+ æˆ‘å†³å®šä¸ä½¿ç”¨é¢å¤–ç©ºé—´ï¼Œ æ‰€ä»¥ç¬¬ä¸€æ¬¡å†™äº†70å¤šè¡Œä»£ç æ‰ACï¼Œ
+ åŽæ¥ç»è¿‡æ”¹è¿›ï¼Œå°±å˜æˆäº†ä¸‹é¢çš„40å¤šè¡Œä»£ç 
  */
 class Solution {
 public:
