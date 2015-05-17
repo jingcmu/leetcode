@@ -1,5 +1,37 @@
-//思路就是，以每个字符为中点向两边延伸（只要满足回文）
-//能延展的最长的保留下来输出，要考虑奇数回文和偶数回文的情况
+//2015-05-17
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        s_ = s;
+        len_ = s_.length();
+        longest_ = "";
+        for (int i = 0; i < len_; ++i) {
+            string tmp = palindrome(i, i);
+            if (tmp.length() > longest_.length())
+                longest_ = tmp;
+            if (i + 1 < len_ && s_[i] == s_[i + 1]) {
+                tmp = palindrome(i, i + 1);
+                if (tmp.length() > longest_.length())
+                    longest_ = tmp;
+            }
+        }
+        return longest_;
+    }
+private:
+    string palindrome(int start, int end) {
+        while (start >= 0 && end < len_) {
+            if (s_[start] != s_[end]) break;
+            start--, end++;
+        }
+        return s_.substr(start + 1, end - start - 1);
+    }
+    string s_;
+    int len_;
+    string longest_;
+};
+
+//鎬濊矾灏辨槸锛屼互姣忎釜瀛楃涓轰腑鐐瑰悜涓よ竟寤朵几锛堝彧瑕佹弧瓒冲洖鏂囷級
+//鑳藉欢灞曠殑鏈�闀跨殑淇濈暀涓嬫潵杈撳嚭锛岃鑰冭檻濂囨暟鍥炴枃鍜屽伓鏁板洖鏂囩殑鎯呭喌
 class Solution {
 public:
     string palindrome(string s, int i, int j, int len){
@@ -22,12 +54,12 @@ public:
         int len = s.length();
         string longestString = "";
         for(int i=0; i<len; i++){
-            string str1 = palindrome(s, i, i, len); //奇数回文
+            string str1 = palindrome(s, i, i, len); //濂囨暟鍥炴枃
             if(str1.length() > longestString.length()){
                 longestString = str1;
             }
             if(i+1 < len && s[i] == s[i+1]){
-                string str2 = palindrome(s, i, i+1, len);//偶数回文
+                string str2 = palindrome(s, i, i+1, len);//鍋舵暟鍥炴枃
                 if(str2.length() > longestString.length()){
                     longestString = str2;
                 }
