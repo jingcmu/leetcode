@@ -6,6 +6,28 @@
   b.如果下一个字符是*号，则当前p的字符也要与s的字符相同或以.取代，不同的是p中的*号可以不断蚕食s中的字符直到/0
     因此递归是s++，p+2，直到s为\0时
 */
+// 2015-05-17 C++
+class Solution {
+public:
+    bool isMatch(string s, string p) {  
+        if (p.length() == 0) return s.length() == 0;
+        if (p[1] != '*') {
+            if (p[0] == s[0] || (p[0] == '.' && s.length() != 0))
+                return isMatch(s.substr(1), p.substr(1));
+            else
+                return false;
+        } else {
+            while (p[0] == s[0] || (p[0] == '.' && s.length() != 0)) {
+                if(isMatch(s, p.substr(2))) {
+                    return true;
+                }
+                s = s.substr(1);
+            }
+            return isMatch(s, p.substr(2));
+        }
+    }
+};
+
 class Solution {
 public:
     bool isMatch(const char *s, const char *p) {  
@@ -21,7 +43,7 @@ public:
         }
         else{
             //若下个字符为*，当前p的字符也要与s的字符相同或以.取代
-            //匹配掉1个或多个字符
+            //匹配掉0个或多个字符
             while(*p == *s || (*p == '.' && *s != '\0')){
                 //取代的字符个数尝试增加
                 if(isMatch(s++, p+2)){
