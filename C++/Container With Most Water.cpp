@@ -1,5 +1,18 @@
-//¿ªÊ¼°å×Ó´¦ÔÚÁ½¶Ë£¬È»ºóÈÃ¶ÌµÄÍùÖĞ¼äÒÆ¶¯
-//¹ı³ÌÖĞËã³ö×î´óµÄÈİ»ı£¬Ö±µ½Á½¸ö°å×ÓÅöÍ·
+//2015-05-20
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int res = 0;
+        for (int i = 0, j = height.size() - 1; i < j; ) {
+            res = max(res, min(height[i], height[j]) * (j - i));
+            height[i] > height[j] ? --j : ++i;
+        }
+        return res;
+    }
+};
+
+//å¼€å§‹æ¿å­å¤„åœ¨ä¸¤ç«¯ï¼Œç„¶åè®©çŸ­çš„å¾€ä¸­é—´ç§»åŠ¨
+//è¿‡ç¨‹ä¸­ç®—å‡ºæœ€å¤§çš„å®¹ç§¯ï¼Œç›´åˆ°ä¸¤ä¸ªæ¿å­ç¢°å¤´
 class Solution {
 public:
     int maxArea(vector<int> &height) {
