@@ -14,15 +14,13 @@ vector<int> zigzagprint(vector<vector<int> > &m) {
   while (true) {
     if (y == width-1 && x == height-1) break;
     if (dir) {
-      (y == width - 1)? res.push_back(m[++x][y]) :
-           res.push_back(m[x][++y]);
+      (y == width - 1)? res.push_back(m[++x][y]) : res.push_back(m[x][++y]);
       while (y > 0 && x < height-1) {
         res.push_back(m[++x][--y]);
       }
       dir = !dir;
     } else {
-      (x == height - 1)? res.push_back(m[x][++y]) :
-           res.push_back(m[++x][y]);
+      (x == height - 1)? res.push_back(m[x][++y]) : res.push_back(m[++x][y]);
       while (x > 0 && y < width-1) {
         res.push_back(m[--x][++y]);
       }
