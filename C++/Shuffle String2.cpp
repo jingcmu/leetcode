@@ -81,7 +81,7 @@ void ShuffleString::BuildShuffledString() {
 			q_.push(p);
 		}
 		pq_.pop();
-		dist++;
+	  dist++;
 		s_res_ += c;
 		// from queue to priority queue
 		if (dist >= min_dist_) {
