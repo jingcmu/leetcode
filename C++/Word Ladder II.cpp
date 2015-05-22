@@ -1,30 +1,30 @@
 /*
-ÕâÒ»Ìâ¸úwork ladderµÄÇø±ğÊÇĞèÒªÓÃÒ»¸ömap¼ÇÂ¼ladderµÄÂ·¾¶
-Õâ¸ömapÉèÖÃµÄºÜÇÉÃî£¬keyÊÇstring´ú±íµ±Ç°½Úµã£¬
-valueÊÇÒ»¸övector<string>ÓÃÀ´¼ÇÂ¼´ÓÄÄĞ©½Úµã¿ÉÒÔµ½µ±Ç°½Úµã
+è¿™ä¸€é¢˜è·Ÿwork ladderçš„åŒºåˆ«æ˜¯éœ€è¦ç”¨ä¸€ä¸ªmapè®°å½•ladderçš„è·¯å¾„
+è¿™ä¸ªmapè®¾ç½®çš„å¾ˆå·§å¦™ï¼Œkeyæ˜¯stringä»£è¡¨å½“å‰èŠ‚ç‚¹ï¼Œ
+valueæ˜¯ä¸€ä¸ªvector<string>ç”¨æ¥è®°å½•ä»å“ªäº›èŠ‚ç‚¹å¯ä»¥åˆ°å½“å‰èŠ‚ç‚¹
 */
 class Solution {
 	public:
 	vector<vector<string> > findLadders(string start, string end,
 		const unordered_set<string> &dict) {
-		unordered_set<string> visited; // ÅĞÖØ
-		unordered_map<string, vector<string> > father; // Ê÷
-		unordered_set<string> current, next; // µ±Ç°²ã£¬ÏÂÒ»²ã£¬ÓÃ¼¯ºÏÊÇÎªÁËÈ¥ÖØ
+		unordered_set<string> visited; // åˆ¤é‡
+		unordered_map<string, vector<string> > father; // æ ‘
+		unordered_set<string> current, next; // å½“å‰å±‚ï¼Œä¸‹ä¸€å±‚ï¼Œç”¨é›†åˆæ˜¯ä¸ºäº†å»é‡
 		bool found = false;
 		current.insert(start);
 		while (!current.empty() && !found) {
-			// ÏÈ½«±¾²ãÈ«²¿ÖÃÎªÒÑ·ÃÎÊ£¬·ÀÖ¹Í¬²ãÖ®¼ä»¥ÏàÖ¸Ïò
+			// å…ˆå°†æœ¬å±‚å…¨éƒ¨ç½®ä¸ºå·²è®¿é—®ï¼Œé˜²æ­¢åŒå±‚ä¹‹é—´äº’ç›¸æŒ‡å‘
 			for (auto word : current)
 				visited.insert(word); 
-			for (auto word : current) { //¶Ôµ±Ç°²ãÃ¿¸öµ¥´Ê±éÀú
+			for (auto word : current) { //å¯¹å½“å‰å±‚æ¯ä¸ªå•è¯éå†
 				for (size_t i = 0; i < word.size(); ++i) {
 					string new_word = word;
-					//Ìæ»»×Ö·û£¬¹¹ÔìĞÂ×Ö·û´®£¬ÅĞ¶ÏÊÇ·ñÔÚdictÖĞ
+					//æ›¿æ¢å­—ç¬¦ï¼Œæ„é€ æ–°å­—ç¬¦ä¸²ï¼Œåˆ¤æ–­æ˜¯å¦åœ¨dictä¸­
 					for (char c = 'a'; c <= 'z'; ++c) {
 						if (c == new_word[i]) continue;
 						swap(c, new_word[i]);
 						if (new_word == end) {
-							found = true; //ÕÒµ½ÁË, ²»ĞèÒª·Åµ½next¶ÓÁĞÁË
+							found = true; //æ‰¾åˆ°äº†, ä¸éœ€è¦æ”¾åˆ°nexté˜Ÿåˆ—äº†
 							father[new_word].push_back(word);
 							break;
 						}
@@ -48,20 +48,20 @@ class Solution {
 		return result;
 	}
 	private:
-	//ÓÃfather¹¹½¨Â·¾¶
-	//param: father±£´æÃ¿¸ö½ÚµãµÄ¸¸½Úµã¶ÓÁĞ£¬pathÊÇ
-	//resultÓÃÀ´±£´æ×îÖÕ½á¹û(´Óstartµ½endµÄÂ·¾¶)£¬
+	//ç”¨fatheræ„å»ºè·¯å¾„
+	//param: fatherä¿å­˜æ¯ä¸ªèŠ‚ç‚¹çš„çˆ¶èŠ‚ç‚¹é˜Ÿåˆ—ï¼Œpathæ˜¯
+	//resultç”¨æ¥ä¿å­˜æœ€ç»ˆç»“æœ(ä»startåˆ°endçš„è·¯å¾„)ï¼Œ
 	void buildPath(unordered_map<string, vector<string> > &father, vector<string> &path,
 			 const string &start, const string &word, vector<vector<string> > &result )
 	{
 		path.push_back(word);
 		if (word == start) {
-			result.push_back(path); //½á¹û·Åµ½result×îºó
-			//½á¹ûÊÇ·´µÄ£¬ËùÒÔÒªÄæĞò
+			result.push_back(path); //ç»“æœæ”¾åˆ°resultæœ€å
+			//ç»“æœæ˜¯åçš„ï¼Œæ‰€ä»¥è¦é€†åº
 			reverse(result.back().begin(), result.back().end());
 		} 
 		else {
-			for (auto f : father[word]) { //°Ñ½ÚµãµÄÃ¿¸öfatherÍÆÈë¶ÓÁĞ
+			for (auto f : father[word]) { //æŠŠèŠ‚ç‚¹çš„æ¯ä¸ªfatheræ¨å…¥é˜Ÿåˆ—
 				buildPath(father, path, start, f, result);
 			}
 		}
