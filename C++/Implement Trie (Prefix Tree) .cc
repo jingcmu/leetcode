@@ -30,7 +30,7 @@ public:
 			}
 			p = p->next[id];
 		}
-		p->is_leaf = true; // 标记为
+		p->is_leaf = true; // 标记为叶子
 	}
 
 	// Returns if the word is in the trie.
