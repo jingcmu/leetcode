@@ -66,4 +66,4 @@ private:
 // Your Trie object will be instantiated and called as such:
 // Trie trie;
 // trie.insert("somestring");
-// trie.search("key");
+// trie.search("key"); 
