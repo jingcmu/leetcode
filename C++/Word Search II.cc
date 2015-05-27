@@ -42,79 +42,82 @@ public:
 		return p;
 	}
 	void propagate(TrieNode* t) {
-	    for (int i = 0; i < MAXCHAR; ++i) {
-	        if (t->next[i]) {
-	            t->next[i]->reachable = false;
-	            propagate(t->next[i]);
-	        }
-	    }
+		for (int i = 0; i < MAXCHAR; ++i) {
+			if (t->next[i]) {
+				t->next[i]->reachable = false;
+				propagate(t->next[i]);
+			}
+		}
 	}
 private:
-    TrieNode* root;
-}; 
+	TrieNode* root;
+};
 
 class Solution {
 public:
-    vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
-        vector<string> v_res;
-        height = board.size();
-        if (!height) return v_res;
-        width = board[0].size();
-        if (!width) return v_res;
-        sort(words.begin(), words.end()); // 排序
-        // 建trie树
-        for (int i = 0; i < words.size(); ++i) {
-            T.insert(words[i]);
-        }
-        vector<vector<bool>> visited(height, vector<bool>(width, false));
-        for (int i = 0; i < words.size(); ++i) {
-            bool found = false;
-            reset(visited);
-            for (int j = 0;  j < height; ++j){
-                for (int k = 0; k < width; ++k){
-                    if(search(board, j, k, words[i], 0, visited)) {
-                        v_res.push_back(words[i]);
-                        found = true;
-                        break;
-                    }
-                }
-                if (found) break;
-            }
-        }
-        set<string> s(v_res.begin(), v_res.end());
-        v_res.assign(s.begin(), s.end());
-        return v_res;
-    }
+	vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
+		vector<string> v_res;
+		height = board.size();
+		if (!height) return v_res;
+		width = board[0].size();
+		if (!width) return v_res;
+		sort(words.begin(), words.end()); // 排序
+		// 建trie树
+		for (int i = 0; i < words.size(); ++i) {
+			T.insert(words[i]);
+		}
+		vector<vector<bool>> visited(height, vector<bool>(width, false));
+		for (int i = 0; i < words.size(); ++i) {
+			bool found = false;
+			reset(visited);
+			for (int j = 0; j < height; ++j){
+				for (int k = 0; k < width; ++k){
+					if (search(board, j, k, words[i], 0, visited)) {
+						v_res.push_back(words[i]);
+						found = true;
+						break;
+					}
+				}
+				if (found) break;
+			}
+			if (!found) {
+				TrieNode* t = T.searchNode(words[i]);
+				t->reachable = false;
+				T.propagate(t);
+			}
+		}
+		set<string> s(v_res.begin(), v_res.end());
+		v_res.assign(s.begin(), s.end());
+		return v_res;
+	}
 private:
-    bool search(vector<vector<char> > &board, int x, int y, string &word, int index, vector<vector<bool>> &visited){
-        if(index == word.length()) return true;
-        
-        TrieNode* t = T.searchNode(word);
-        if (!t->reachable) return false;
+	bool search(vector<vector<char> > &board, int x, int y, string &word, int index, vector<vector<bool>> &visited){
+		if (index == word.length()) return true;
 
-        if(x<0 || y<0 || x>=height || 
-           y>=width || visited[x][y] ||
-           board[x][y] != word[index] ) return false;  
-		
-        visited[x][y] = true;
-        if(search(board, x+1, y, word, index+1, visited) ||
-           search(board, x-1, y, word, index+1, visited) ||
-           search(board, x, y+1, word, index+1, visited) ||
-           search(board, x, y-1, word, index+1, visited) ) return true;
-		
-        visited[x][y] = false;
-        t->reachable = false;
-        T.propagate(t);
-        return false;
-    }
-    void reset(vector<vector<bool>>& visited) {
-        for (int i = 0; i < height; ++i) {
-            for (int j = 0; j < width; ++j) {
-                visited[i][j] = false;
-            }
-        }
-    }
-    Trie T;
-    int height;
-    int width;
+		TrieNode* t = T.searchNode(word);
+		if (!t->reachable) return false;
+
+		if (x<0 || y<0 || x >= height ||
+			y >= width || visited[x][y] ||
+			board[x][y] != word[index]) return false;
+
+		visited[x][y] = true;
+		if (search(board, x + 1, y, word, index + 1, visited) ||
+			search(board, x - 1, y, word, index + 1, visited) ||
+			search(board, x, y + 1, word, index + 1, visited) ||
+			search(board, x, y - 1, word, index + 1, visited)) return true;
+
+		visited[x][y] = false;		
+		return false;
+	}
+	void reset(vector<vector<bool>>& visited) {
+		for (int i = 0; i < height; ++i) {
+			for (int j = 0; j < width; ++j) {
+				visited[i][j] = false;
+			}
+		}
+	}
+	Trie T;
+	int height;
+	int width;
 };
