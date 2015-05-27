@@ -61,7 +61,7 @@ private:
 		}
 		return p;
 	}
-};
+}; 
 
 // Your Trie object will be instantiated and called as such:
 // Trie trie;
