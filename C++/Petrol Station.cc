@@ -1,3 +1,16 @@
+/*
+There is long motorway of length M. 
+On the motorway at some points there are petrol stations (there is given integer array T[] of length N - the positions of petrol stations). 
+We have funds to add at most K new petrol stations on this motorway. 
+We want to minimize largest distance of motorway which is uncovered by petrol stations. 
+
+You can only put petrol stations on integer positions. 
+
+Example: 
+N = 5, M = 20, K = 3, T = [3, 7, 15, 18, 1] 
+Answer: 3 (obtainable for example by adding petrol stations at positions: 5, 10 and 13)
+*/
+
 #include <iostream>
 #include <algorithm>
 #include <numeric>
