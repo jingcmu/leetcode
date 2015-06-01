@@ -1,4 +1,4 @@
-// O(N)?
+// O(NlogN)
 class Solution {
 public:
     struct cmp{
