@@ -1,14 +1,12 @@
 /*
-There is long motorway of length M. 
-On the motorway at some points there are petrol stations (there is given integer array T[] of length N - the positions of petrol stations). 
-We have funds to add at most K new petrol stations on this motorway. 
-We want to minimize largest distance of motorway which is uncovered by petrol stations. 
-
-You can only put petrol stations on integer positions. 
+有一个很长的车道，长度为 M. 
+在车道的某些位置有一些加油站，长度为n的数组int T[] 代表这些加油站的位置。
+我们现在要增加k的新的加油站以便尽量缩短加油站之间的最大间隔. 
+你只可以在整数位置放置加油站
 
 Example: 
 N = 5, M = 20, K = 3, T = [3, 7, 15, 18, 1] 
-Answer: 3 (obtainable for example by adding petrol stations at positions: 5, 10 and 13)
+Answer: 3 (放置新加油站的位置: 5, 10 and 13)
 */
 
 #include <iostream>
