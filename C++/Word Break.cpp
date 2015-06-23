@@ -28,18 +28,18 @@ f(i) = any_of(f(j)&&s[j + 1, i] 在 dict 中); 0 <= j < i
 */
 class Solution {
 public:
-	bool wordBreak(string s, unordered_set<string> &dict) {
-		// 长度为n 的字符串有n+1 个隔板
-		vector<bool> f(s.size() + 1, false);
-		f[0] = true; // 空字符串
-		for (int i = 1; i <= s.size(); ++i) {
-			for (int j = i - 1; j >= 0; --j) {
-				if (f[j] && dict.find(s.substr(j, i - j)) != dict.end()) {
-					f[i] = true; 
-					break; //发现第i个位置前能分词就可以不用搜索其他的j了
-				}
-			}
-		}
-		return f[s.size()];
-	}
+  bool wordBreak(string s, unordered_set<string> &dict) {
+    // 长度为n 的字符串有n+1 个隔板
+    vector<bool> f(s.size() + 1, false);
+    f[0] = true; // 空字符串
+    for (int i = 1; i <= s.size(); ++i) {
+      for (int j = i - 1; j >= 0; --j) {
+        if (f[j] && dict.find(s.substr(j, i - j)) != dict.end()) {
+          f[i] = true;
+          break; //发现第i个位置前能分词就可以不用搜索其他的j了
+        }
+      }
+    }
+    return f[s.size()];
+  }
 };
