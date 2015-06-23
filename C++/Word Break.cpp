@@ -1,43 +1,42 @@
-//DFS½â·¨+±¸ÍüÂ¼
+//DFSè§£æ³•+å¤‡å¿˜å½•
 class Solution {
 private:
-    map<int, bool> m;
+  map<int, bool> m;
 public:
-    bool wordBreak(string s, unordered_set<string> &dict) {
-        int len = s.length();
-		//¿´¿´s±¾ÉíÔÚ²»ÔÚdictÀïÃæ
-        if(dict.find(s) != dict.end()) return true;
-        
-		//¶ÔÃ¿¸öÎ»ÖÃ³¢ÊÔ½øĞĞ·Ö¸î
-        for(int i=1; i<len; i++) {
-            if(dict.find(s.substr(0,i)) != dict.end()) { //Èç¹ûÄ³Î»ÖÃÖ®Ç°µÄ×Ó´®ÔÚdictÖĞ£¬ÔòÅĞ¶ÏÊ£ÓàµÄÊÇ·ñÄÜ»®·Ö 
-                if(!m[i] && wordBreak(s.substr(i,len-i), dict)) {
-                    return true;
-                }
-                else {
-                    m[i] = true; //ÓÃ±¸ÍüÂ¼¼ÇÂ¼ÏÂ£¬Õâ¸öÎ»ÖÃ¾Í²»±ØÖØ¸´¼ìÑéÁË
-                }
-            }
+  bool wordBreak(string s, unordered_set<string> &dict) {
+    int len = s.length();
+    //çœ‹çœ‹sæœ¬èº«åœ¨ä¸åœ¨dicté‡Œé¢
+    if(dict.find(s) != dict.end()) return true;
+    //å¯¹æ¯ä¸ªä½ç½®å°è¯•è¿›è¡Œåˆ†å‰²
+    for(int i=1; i<len; i++) {
+      if(dict.find(s.substr(0,i)) != dict.end()) { //å¦‚æœæŸä½ç½®ä¹‹å‰çš„å­ä¸²åœ¨dictä¸­ï¼Œåˆ™åˆ¤æ–­å‰©ä½™çš„æ˜¯å¦èƒ½åˆ’åˆ† 
+        if(!m[i] && wordBreak(s.substr(i,len-i), dict)) {
+          return true;
         }
-        return false;
+        else {
+          m[i] = true; //ç”¨å¤‡å¿˜å½•è®°å½•ä¸‹ï¼Œè¿™ä¸ªä½ç½®å°±ä¸å¿…é‡å¤æ£€éªŒäº†
+        }
+      }
     }
+    return false;
+  }
 };
 
-//DP½â·¨
-/*Éè×´Ì¬Îªf(i)£¬±íÊ¾s[0,i] ÊÇ·ñ¿ÉÒÔ·Ö´Ê£¬Ôò×´Ì¬×ªÒÆ·½³ÌÎª
-f(i) = any_of(f(j)&&s[j + 1, i] ÔÚ dict ÖĞ); 0 <= j < i
+//DPè§£æ³•
+/*è®¾çŠ¶æ€ä¸ºf(i)ï¼Œè¡¨ç¤ºs[0,i] æ˜¯å¦å¯ä»¥åˆ†è¯ï¼Œåˆ™çŠ¶æ€è½¬ç§»æ–¹ç¨‹ä¸º
+f(i) = any_of(f(j)&&s[j + 1, i] åœ¨ dict ä¸­); 0 <= j < i
 */
 class Solution {
 public:
 	bool wordBreak(string s, unordered_set<string> &dict) {
-		// ³¤¶ÈÎªn µÄ×Ö·û´®ÓĞn+1 ¸ö¸ô°å
+		// é•¿åº¦ä¸ºn çš„å­—ç¬¦ä¸²æœ‰n+1 ä¸ªéš”æ¿
 		vector<bool> f(s.size() + 1, false);
-		f[0] = true; // ¿Õ×Ö·û´®
+		f[0] = true; // ç©ºå­—ç¬¦ä¸²
 		for (int i = 1; i <= s.size(); ++i) {
 			for (int j = i - 1; j >= 0; --j) {
 				if (f[j] && dict.find(s.substr(j, i - j)) != dict.end()) {
 					f[i] = true; 
-					break; //·¢ÏÖµÚi¸öÎ»ÖÃÇ°ÄÜ·Ö´Ê¾Í¿ÉÒÔ²»ÓÃËÑË÷ÆäËûµÄjÁË
+					break; //å‘ç°ç¬¬iä¸ªä½ç½®å‰èƒ½åˆ†è¯å°±å¯ä»¥ä¸ç”¨æœç´¢å…¶ä»–çš„jäº†
 				}
 			}
 		}
