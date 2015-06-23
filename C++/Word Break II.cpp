@@ -1,37 +1,37 @@
 class Solution {
 public:
-	//¸úword breakÇø±ğ£ºÓÃprev¼ÇÂ¼ÏÂÄÄĞ©Î»ÖÃ¿ÉÒÔ·Ö´Ê³öÀ´
-	vector<string> wordBreak(string s, unordered_set<string> &dict) {
-		// ³¤¶ÈÎªn µÄ×Ö·û´®ÓĞn+1 ¸ö¸ô°å
-		vector<bool> f(s.length() + 1, false);
-		// prev[i][j] Îªtrue£¬±íÊ¾s[j, i) ÊÇÒ»¸öºÏ·¨µ¥´Ê£¬¿ÉÒÔ´Ój ´¦ÇĞ¿ª
-		// µÚÒ»ĞĞÎ´ÓÃ
-		vector<vector<bool> > prev(s.length() + 1, vector<bool>(s.length()));
-		/*DP, Éè×´Ì¬Îªf(i)£¬±íÊ¾×Ö·û´®s´ÓµÚ0¸öµ½µÚi¸ö×Ö·ûÖ®Ç°ÄÇ¸öÎ»ÖÃÊÇ·ñ¿ÉÒÔ·Ö´Ê£¬
-		×´Ì¬×ªÒÆ·½³ÌÎª£º
-		f(i) = any_of(f(j)&&s[j, i) ÔÚ dict ÖĞ); 0 <= j < i
-		*/
-		f[0] = true; // ¿Õ×Ö·û´®
-		for (size_t i = 1; i <= s.length(); ++i) { //´ÓµÚÒ»¸ö·Ö¸ôµ½Î²ºóÔªËØ
-			for (int j = i - 1; j >= 0; --j) {
-				if (f[j] && dict.find(s.substr(j, i - j)) != dict.end()) {
-					f[i] = true; //·¢ÏÖµÚi¸öÎ»ÖÃÇ°ÄÜ·Ö´ÊÈÔÈ»ÒªÊÔÌ½ÆäËûµÄÎ»ÖÃ
-					prev[i][j] = true; //´Ójµ½iÇ°µÄÎ»ÖÃÊÇÒ»¸ödictÖĞµÄµ¥´Ê
-				}
-			}
-		}
-		vector<string> result;
-		vector<string> path;
-		gen_path(s, prev, s.length(), path, result);
-		return result;
-	}
+  //è·Ÿword breakåŒºåˆ«ï¼šç”¨prevè®°å½•ä¸‹å“ªäº›ä½ç½®å¯ä»¥åˆ†è¯å‡ºæ¥
+  vector<string> wordBreak(string s, unordered_set<string> &dict) {
+    // é•¿åº¦ä¸ºn çš„å­—ç¬¦ä¸²æœ‰n+1 ä¸ªéš”æ¿
+    vector<bool> f(s.length() + 1, false);
+    // prev[i][j] ä¸ºtrueï¼Œè¡¨ç¤ºs[j, i) æ˜¯ä¸€ä¸ªåˆæ³•å•è¯ï¼Œå¯ä»¥ä»j å¤„åˆ‡å¼€
+    // ç¬¬ä¸€è¡Œæœªç”¨
+    vector<vector<bool> > prev(s.length() + 1, vector<bool>(s.length()));
+    /*DP, è®¾çŠ¶æ€ä¸ºf(i)ï¼Œè¡¨ç¤ºå­—ç¬¦ä¸²sä»ç¬¬0ä¸ªåˆ°ç¬¬iä¸ªå­—ç¬¦ä¹‹å‰é‚£ä¸ªä½ç½®æ˜¯å¦å¯ä»¥åˆ†è¯ï¼Œ
+    çŠ¶æ€è½¬ç§»æ–¹ç¨‹ä¸ºï¼š
+    f(i) = any_of(f(j)&&s[j, i) åœ¨ dict ä¸­); 0 <= j < i
+    */
+    f[0] = true; // ç©ºå­—ç¬¦ä¸²
+    for (size_t i = 1; i <= s.length(); ++i) { //ä»ç¬¬ä¸€ä¸ªåˆ†éš”åˆ°å°¾åå…ƒç´ 
+    	for (int j = i - 1; j >= 0; --j) {
+    		if (f[j] && dict.find(s.substr(j, i - j)) != dict.end()) {
+    			f[i] = true; //å‘ç°ç¬¬iä¸ªä½ç½®å‰èƒ½åˆ†è¯ä»ç„¶è¦è¯•æ¢å…¶ä»–çš„ä½ç½®
+    			prev[i][j] = true; //ä»jåˆ°iå‰çš„ä½ç½®æ˜¯ä¸€ä¸ªdictä¸­çš„å•è¯
+    		}
+    	}
+    }
+    vector<string> result;
+    vector<string> path;
+    gen_path(s, prev, s.length(), path, result);
+    return result;
+  }
 private:
-	// DFS ±éÀúÊ÷£¬Éú³ÉÂ·¾¶
+	// DFS éå†æ ‘ï¼Œç”Ÿæˆè·¯å¾„
 	void gen_path(const string &s, const vector<vector<bool> > &prev,
 		int cur, vector<string> &path, vector<string> &result) {
 		if (cur == 0) {
 			string tmp;
-			//pushµÄÊ±ºòÊÇÄæĞòµÄ£¬ÏÖÔÚÔÙÄæ¹ıÀ´
+			//pushçš„æ—¶å€™æ˜¯é€†åºçš„ï¼Œç°åœ¨å†é€†è¿‡æ¥
 			for (auto iter = path.crbegin(); iter != path.crend(); ++iter){
 				tmp += *iter + " ";
 			}
@@ -39,10 +39,10 @@ private:
 			result.push_back(tmp);
 		}
 		for (size_t i = 0; i < s.size(); ++i) {
-			if (prev[i][cur]) { //Èç¹û´Ós[cur, i)ÊÇÒ»¸ödictÖĞµÄµ¥´Ê
-				path.push_back(s.substr(i, cur - i)); //°Ñ¸Ãµ¥´ÊÈëÕ»
-				gen_path(s, prev, i, path, result); //¶Ô×Ö·û´®Ê£Óà²¿·Öµİ¹é
-				path.pop_back(); //»¹Ô­ÏÖ³¡
+			if (prev[i][cur]) { //å¦‚æœä»s[cur, i)æ˜¯ä¸€ä¸ªdictä¸­çš„å•è¯
+				path.push_back(s.substr(i, cur - i)); //æŠŠè¯¥å•è¯å…¥æ ˆ
+				gen_path(s, prev, i, path, result); //å¯¹å­—ç¬¦ä¸²å‰©ä½™éƒ¨åˆ†é€’å½’
+				path.pop_back(); //è¿˜åŸç°åœº
 			}
 		}
 	}
