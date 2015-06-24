@@ -13,12 +13,12 @@ public:
     */
     f[0] = true; // 空字符串
     for (size_t i = 1; i <= s.length(); ++i) { //从第一个分隔到尾后元素
-    for (int j = i - 1; j >= 0; --j) {
-    if (f[j] && dict.find(s.substr(j, i - j)) != dict.end()) {
-    f[i] = true; //发现第i个位置前能分词仍然要试探其他的位置
-    prev[i][j] = true; //从j到i前的位置是一个dict中的单词
-    }
-    }
+      for (int j = i - 1; j >= 0; --j) {
+        if (f[j] && dict.find(s.substr(j, i - j)) != dict.end()) {
+          f[i] = true; //发现第i个位置前能分词仍然要试探其他的位置
+          prev[i][j] = true; //从j到i前的位置是一个dict中的单词
+        }
+      }
     }
     vector<string> result;
     vector<string> path;
