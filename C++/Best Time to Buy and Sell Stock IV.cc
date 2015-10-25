@@ -13,26 +13,27 @@ global[i][j] = max(local[i][j], global[i-1][j])
 */
 class Solution {
 public:
-    int maxProfit(int k, vector<int>& prices) {
-        int size = prices.size();
-        if (size < 2 || k == 0) return 0;
-        if (k > size / 2) {
-          int sum = 0;
-          for (int i=1; i<prices.size(); i++) {
-			      int diff = prices[i] - prices[i-1];
-			      if(diff > 0) sum += diff;
-		      }
-		      return sum;
-        }
-        vector<vector<int> > local(size, vector<int>(k+1,0));
-        vector<vector<int> > global(size, vector<int>(k+1,0));
-        for (int i = 1; i < size; i++) {
-          int diff = prices[i] - prices[i-1];
-          for (int j = 1; j <= k; j++) {
-            local[i][j] = max(global[i-1][j-1] + max(diff,0), local[i-1][j] + diff);
-            global[i][j] = max(local[i][j], global[i-1][j]);
-          }
-        }
-        return global[size-1][k];
+  int maxProfit(int k, vector<int>& prices) {
+    int size = prices.size();
+    if (size < 2 || k == 0) return 0;
+    // 若k大于size/2，则题目变成II
+    if (k > size / 2) {
+      int sum = 0;
+      for (int i=1; i<prices.size(); i++) {
+        int diff = prices[i] - prices[i-1];
+        if(diff > 0) sum += diff;
+      }
+      return sum;
     }
+    vector<vector<int> > local(size, vector<int>(k+1,0));
+    vector<vector<int> > global(size, vector<int>(k+1,0));
+    for (int i = 1; i < size; i++) {
+      int diff = prices[i] - prices[i-1];
+      for (int j = 1; j <= k; j++) {
+        local[i][j] = max(global[i-1][j-1] + max(diff,0), local[i-1][j] + diff);
+        global[i][j] = max(local[i][j], global[i-1][j]);
+      }
+    }
+    return global[size-1][k];
+  }
 };
