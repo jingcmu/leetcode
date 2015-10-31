@@ -1,3 +1,22 @@
+// 最佳解法
+
+bool match(const char s, const char r) {
+  return s==r || (s && r=='.');
+}
+
+bool is_match(const char * s, const char * r) {
+  if (!*r) {
+    return !*s;
+  }
+  // Malformed regex handling here:
+  // ASSERT(*r != ‘*’);
+  if (*(r+1) == '*') {
+    return is_match(s, r+2) || (match(*s, *r) && is_match(s+1, r));
+  } else {
+    return match(*s, *r) && is_match(s+1, r+1);
+  }
+}
+
 /*p是正则表达式，s为字符串
 1.如果p为空串 则s必须为空串才匹配
 2.如果非空, 则分2种情况讨论
