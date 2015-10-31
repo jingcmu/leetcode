@@ -1,5 +1,4 @@
 // 最佳解法
-
 bool match(const char s, const char r) {
   return s==r || (s && r=='.');
 }
