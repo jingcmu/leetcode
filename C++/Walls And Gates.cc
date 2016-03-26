@@ -1,3 +1,4 @@
+// BFS
 class Solution {
 public:
     void wallsAndGates(vector<vector<int>>& rooms) {
@@ -8,10 +9,11 @@ public:
             for (int c = 0; c < n; ++c)
                 if (rooms[r][c] == 0) // A gate
                     q.push(make_pair(r, c));
-        vector<pair<int, int>> dirs = {{-1,0}, {1,0}, {0,-1}, {0,1}};
+        vector<pair<int, int>> dirs = {{-1,0}, {1,0}, {0,-1}, {0,1}}; // A good way to define dirs
         while(!q.empty()) {
             int r = q.front().first, c = q.front().second;
             q.pop();
+            // Try each direction
             for (auto dir : dirs) {
                 int x = r + dir.first, y = c + dir.second;
                 if (x < 0 || y < 0 || x >= m || y >= n || rooms[x][y] <= rooms[r][c]) continue;
