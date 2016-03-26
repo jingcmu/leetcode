@@ -1,86 +1,16 @@
 /*
-ÕâÌâ¾ÍÊÇ°ÑËùÓĞ±»XÎ§×¡µÄO»»³ÉX£¬OÃ»ÓĞ±»XÈ«Î§×¡µÄÇé¿ö¾ÍÊÇÄÇÒ»×éOÁ¬½ÓÁË±ß½ç£¬
-Ö»Òª°ÑÁ¬½ÓÁË±ß½çµÄOÈ«²¿ÏÈ»»³É*£¨»òÆäËû×Ö·û£©£¬È»ºó°ÑÊ£ÓàµÄOÈ«²¿»»³É*£¬
-×îºóÔÙ°Ñ*»»»ØO¼´¿É
-ÔÚ°ÑÁ¬½ÓÁË±ß½çµÄOÈ«²¿ÏÈ»»³É*ÕâÒ»²½£¬ÓÃBFS¿íËÑ
+è¿™é¢˜å°±æ˜¯æŠŠæ‰€æœ‰è¢«Xå›´ä½çš„Oæ¢æˆXï¼ŒOæ²¡æœ‰è¢«Xå…¨å›´ä½çš„æƒ…å†µå°±æ˜¯é‚£ä¸€ç»„Oè¿æ¥äº†è¾¹ç•Œï¼Œ
+åªè¦æŠŠè¿æ¥äº†è¾¹ç•Œçš„Oå…¨éƒ¨å…ˆæ¢æˆ*ï¼ˆæˆ–å…¶ä»–å­—ç¬¦ï¼‰ï¼Œç„¶åæŠŠå‰©ä½™çš„Oå…¨éƒ¨æ¢æˆ*ï¼Œ
+æœ€åå†æŠŠ*æ¢å›Oå³å¯
+åœ¨æŠŠè¿æ¥äº†è¾¹ç•Œçš„Oå…¨éƒ¨å…ˆæ¢æˆ*è¿™ä¸€æ­¥ï¼Œç”¨BFSå®½æœ
 */
-class Solution {
-public:
-    void solve(vector<vector<char>> &board) {
-        int height = board.size(), width;
-        if(height == 0) return;
-        width = board[0].size();
-		//ÒÔÁ½¸öÊú±ßÉÏµÄOÎªÆğµã½øĞĞ¿íËÑÌæ»»
-        for(int i=0; i<height; i++){
-            if(board[i][0] == 'O'){
-                bfs(i, 0, board);
-            } 
-            if(board[i][width-1] == 'O'){
-                bfs(i, width-1, board);
-            }
-        }
-        //ÒÔÉÏÏÂÁ½¸öºá±ßÉÏµÄOÎªÆğµã½øĞĞ¿íËÑÌæ»»
-        for(int j=1; j<width-1; j++){
-            if(board[0][j] == 'O'){
-                bfs(0, j, board);
-            }
-            if(board[height-1][j] == 'O'){
-                bfs(height-1, j, board);
-            }
-        }
-        //°ÑO»»³ÉX£¬*»»³ÉO
-        for(int i=0; i<height; i++){
-            for(int j=0; j<width; j++){
-                if(board[i][j] == 'O'){
-                    board[i][j] = 'X';
-                }
-                else if(board[i][j] == '*'){
-                    board[i][j] = 'O';
-                }
-            }
-        }
-    }
-private:
-    struct position{
-        int x;
-        int y;
-    };
-    
-    void bfs(int x, int y, vector<vector<char>> &board){
-        queue<position> q;
-        visit(x, y, board, q); //·ÃÎÊ´¦ÓÚ±ß½çÉÏµÄµã(Æğµã)
-        while(!q.empty()) {
-            //´Ó¶ÓÁĞÈ¡³öÒ»¸öµã£¬²¢ÇÒ·ÃÎÊÆäÉÏÏÂ×óÓÒËÄ¸öµã
-            position cur = q.front(); 
-            q.pop();
-            visit(cur.x-1, cur.y, board, q);
-            visit(cur.x, cur.y-1, board, q);
-            visit(cur.x+1, cur.y, board, q);
-            visit(cur.x, cur.y+1, board, q);
-        }
-    }
-    //·ÃÎÊ×ø±êÎª(x,y)µÄ½Úµã£¬Èç¹ûÊÇO£¬ÔòÌæ»»³É*£¬²¢·ÅÈë¶ÓÁĞ
-    void visit(int x, int y, vector<vector<char>> &board, queue<position> &q){
-        if(x<0 || y<0 || x>=board.size() || y>=board[0].size() || board[x][y] == 'X'){
-            return;
-        }
-        if(board[x][y] == 'O'){
-            position p;
-            p.x = x;
-            p.y = y;
-            board[x][y] = '*';
-            q.push(p);
-        }
-    }
-};
-
-//Use make_pair to replace struct position, and improve the algorithm a little bit
 class Solution {
 public:
     void solve(vector<vector<char>> &board) {
         h = board.size();
         if(h == 0) return;
         w = board[0].size();
+        //ä»¥ä¸¤ä¸ªç«–è¾¹ä¸Šçš„Oä¸ºèµ·ç‚¹è¿›è¡Œå®½æœæ›¿æ¢
         for(int i=0; i<h; i++) {
             if(board[i][0] == 'O') {
                 q.push(make_pair(i,0));
@@ -89,6 +19,7 @@ public:
                 q.push(make_pair(i,w-1));
             }
         }
+        //ä»¥ä¸Šä¸‹ä¸¤ä¸ªæ¨ªè¾¹ä¸Šçš„Oä¸ºèµ·ç‚¹è¿›è¡Œå®½æœæ›¿æ¢
         for(int i=0; i<w; i++) {
             if(board[0][i] == 'O') {
                 q.push(make_pair(0, i));
@@ -98,6 +29,7 @@ public:
             }
         }
         bfs(board);
+        //æŠŠOæ¢æˆXï¼Œ*æ¢æˆO
         for(int i=0; i<h; i++) {
             for(int j=0; j<w; j++) {
                 if(board[i][j] == '*') {
@@ -116,6 +48,7 @@ private:
         while(!q.empty()) {
             pair<int, int> p = q.front();
             q.pop();
+            // æ›¿æ¢æˆ*
             board[p.first][p.second] = '*';
             visit(board, p.first+1, p.second);
             visit(board, p.first-1, p.second);
@@ -123,10 +56,12 @@ private:
             visit(board, p.first, p.second-1);
         }
     }
+    //è®¿é—®åæ ‡ä¸º(x,y)çš„èŠ‚ç‚¹
     void visit(vector<vector<char>> &board, int y, int x) {
         if(x<0 || x>w-1 || y<0 || y>h-1 || board[y][x] != 'O') {
             return;
         }
+        // å¦‚æœä¸º0ï¼Œæ”¾å…¥é˜Ÿåˆ—
         q.push(make_pair(y, x));
     }
 };
