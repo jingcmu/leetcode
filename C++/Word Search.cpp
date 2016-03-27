@@ -1,18 +1,15 @@
-//Ë¼Â·£º²»ÖªµÀËÑË÷Æğµã£¿ÒÔÃ¿¸öµãÎªÆğµãËÑË÷£¬·´ÕıºÜ¿ì»á¼ôÖ¦µÄ
-//ÕâÀïÓÃµÄÆäÊµ¾ÍÊÇ±¸ÍüÂ¼·¨£¬ÓÃÁËÒ»¸övisitedÀ´¼ÇÂ¼ÊÇ·ñÒÑ¾­·ÃÎÊ¹ı
+//æ€è·¯ï¼šä¸çŸ¥é“æœç´¢èµ·ç‚¹ï¼Ÿä»¥æ¯ä¸ªç‚¹ä¸ºèµ·ç‚¹æœç´¢ï¼Œåæ­£å¾ˆå¿«ä¼šå‰ªæçš„
+//è¿™é‡Œç”¨çš„å…¶å®å°±æ˜¯å¤‡å¿˜å½•æ³•ï¼Œç”¨äº†ä¸€ä¸ªvisitedæ¥è®°å½•æ˜¯å¦å·²ç»è®¿é—®è¿‡
 class Solution {
-private:
-    int height;
-    int width;
 public:
     bool exist(vector<vector<char> > &board, string word) {
-        height = board.size();
-        if(!height) return false;
-        width = board[0].size();
-        vector<vector<bool>> visited(height, vector<bool>(width, false));
-        for(int i=0; i<height; i++){
-            for(int j=0; j<width; j++){
-                if(search(board, i, j, word, 0, visited)) {
+        if(board.empty()) return false;
+        int m = board.size();
+        int n = board[0].size();
+        vector<vector<bool>> visited(m, vector<bool>(n, false));
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                if(search(board, i, j, m, n, word, 0, visited)) {
                     return true;
                 }
             }
@@ -20,19 +17,19 @@ public:
         return false;
     }
     
-    bool search(vector<vector<char> > &board, int x, int y, string &word, int index, vector<vector<bool>> &visited){
+    bool search(vector<vector<char>> &board, int x, int y, int m, int n,
+                string &word, int index, vector<vector<bool>> &visited){
         if(index == word.length()) return true;
+        vector<pair<int,int>> dirs = {{1,0},{-1,0},{0,1},{0,-1}};
 
-        if(x<0 || y<0 || x>=height || 
-           y>=width || visited[x][y] ||
-           board[x][y] != word[index] ) return false;  
+        if(x<0 || y<0 || x>=m || y>=n || visited[x][y] || board[x][y] != word[index])
+            return false;  
 		
         visited[x][y] = true;
-        if(search(board, x+1, y, word, index+1, visited) ||
-           search(board, x-1, y, word, index+1, visited) ||
-           search(board, x, y+1, word, index+1, visited) ||
-           search(board, x, y-1, word, index+1, visited) ) return true;
-		
+        for (auto dir : dirs) {
+            if(search(board,x+dir.first,y+dir.second,m,n,word,index+1,visited))
+                return true;
+        }
         visited[x][y] = false;
         return false;
     }
