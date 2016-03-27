@@ -14,7 +14,7 @@ public:
         int m = grid.size(), n = grid[0].size();
         vector<vector<int>> total(m,vector<int>(n,0));
         vector<vector<int>> newGrid = grid;
-        int buildingNum = 0, minDist = INT_MAX;
+        int canAchieve = 0, minDist = INT_MAX;
         vector<pair<int, int>> dirs = {{0,1}, {1,0}, {0,-1}, {-1,0}};
         for(int i = 0; i < m; ++i) {
             for(int j = 0; j < n; ++j) {
@@ -30,7 +30,7 @@ public:
                             int x = cur.first+d.first, y = cur.second+d.second;
                             if(x < m && x >= 0 && y < n && y >= 0) {
                                 // 跳过之前某个建筑到不了的点或建筑或障碍物
-                                if(newGrid[x][y] != buildingNum) continue;
+                                if(newGrid[x][y] != canAchieve) continue;
                                 --newGrid[x][y];
                                 dist[x][y] = dist[cur.first][cur.second] + 1;
                                 total[x][y] += dist[x][y];
@@ -38,13 +38,13 @@ public:
                             }
                         }
                     }
-                    --buildingNum;
+                    --canAchieve;
                 }
             }
         }
         for(int i = 0; i<total.size(); ++i) {
             for(int j = 0; j<total[0].size(); ++j) {
-                if(total[i][j] && newGrid[i][j] == buildingNum)
+                if(total[i][j] && newGrid[i][j] == canAchieve)
                     minDist = min(minDist, total[i][j]);
             }
         }
