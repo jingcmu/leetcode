@@ -1,3 +1,12 @@
+/*
+traverse整个grid， 一旦发现1 就开始BFS. 对于第一个building(which is grid[i][j] == 1) 
+它可以到达的地方是所有为0 的点，一旦它visited过这些点，我们update其为－1。 
+对于第二个building，我们只能走那些－1的点，为什么呢？因为如果第一个点不能到达某一个点p, 
+那么这个p已经不满足题目要求, 我们没必要去check这个点。。
+因此最终我们traverse total 这个matrix的时候不仅要跳过那些 total[i][j] == 0 的点
+（因为这些点是building或者obstacle的位置）， 而且我们还要跳过 newGrid[i][j] != canAchieve 的点
+（因为这些点不能被所有的building到达，其实 canAchieve 这个变量记录了一共有多少building)。。
+*/
 class Solution {
 public:
     int shortestDistance(vector<vector<int>>& grid) {
