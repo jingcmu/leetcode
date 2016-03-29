@@ -49,6 +49,7 @@ public:
         }
         // 对每个节点进行DFS看看有没有环
         for (int i = 0; i < numCourses; ++i) {
+            if (visit[i]) continue;
             if (!canFinishDFS(graph, visit, i)) return false;
         }
         return true;
