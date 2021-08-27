@@ -4,7 +4,6 @@ My solution:
 class Solution {
 public:
     bool isPalindrome(string s) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
         int len = s.length();
         bool isPalin = true;
         int head = 0, tail = len-1;
