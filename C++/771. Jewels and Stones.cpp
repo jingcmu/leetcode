@@ -8,7 +8,7 @@ public:
         }
         
         int j_num = 0;
-        for_each (stones.begin(), stones.end(), 
+        for_each (stones.cbegin(), stones.cend(), 
                   [&](const char& c)
                   { if (s_jewels.find(c) != s_jewels.end()) j_num++; });
         
